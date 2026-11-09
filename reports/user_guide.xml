@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     LE GUIDE DE QUIZ BIBLIQUE — FICHIER PRODUIT, NE PAS MODIFIER À LA MAIN
+
+     Source unique : biblical_quiz/docs/GUIDE_UTILISATEUR.md
+     Régénérer (depuis le dossier sunday_jobs) :
+
+         python3 docs/md_to_guide_qweb.py quiz-biblique
+
+     Une correction faite ici serait perdue à la prochaine conversion, et le
+     guide du dépôt de l'application continuerait à dire autre chose.
+═══════════════════════════════════════════════════════════════════════ -->
+<odoo>
+
+    <!-- Le contenu : appelé par la page en ligne (/apps/quiz-biblique/guide) et par
+         le rapport imprimé ci-dessous. Il ne porte aucune couleur. -->
+    <template id="user_guide_content" name="Guide Quiz Biblique — contenu">
+        <t>
+            <p><em>Lire et comprendre la Bible.</em></p>
+            <p>Quiz Biblique est un compagnon de lecture. Vous lisez un court passage de la Bible dans l'application, puis quelques questions vérifient ce que vous avez compris. Chaque réponse est expliquée et renvoie au verset qui la justifie. L'application fonctionne <strong>sans Internet</strong> et <strong>sans compte</strong> : tout reste sur votre téléphone.</p>
+            <p>Le texte biblique est celui de la <strong>Louis Segond 1910</strong> en français et de la <strong>King James Version 1769</strong> en anglais. Les questions s'en tiennent à ce que dit le texte, sans prendre parti entre les Églises. L'application convient à tous : jeunes, familles, groupes de lecture.</p>
+            <p>Ce guide commence par une visite rapide, puis présente <strong>10 exemples complets</strong>, tirés de la vie de tous les jours.</p>
+            <hr/>
+            <nav class="sommaire">
+            <h2 id="sommaire">Sommaire</h2>
+            <ul>
+            <li><a href="#visite-rapide">Visite rapide</a>
+            </li>
+            <li><a href="#premier-lancement">Premier lancement</a>
+            </li>
+            <li>Exemples :
+            <ol>
+            <li><a href="#exemple-1--suivre-votre-première-leçon">Suivre votre première leçon</a>
+            </li>
+            <li><a href="#exemple-2--réviser-les-questions-ratées">Réviser les questions ratées</a>
+            </li>
+            <li><a href="#exemple-3--lire-la-bible-librement">Lire la Bible librement</a>
+            </li>
+            <li><a href="#exemple-4--vérifier-ce-que-vous-avez-lu">Vérifier ce que vous avez lu</a>
+            </li>
+            <li><a href="#exemple-5--découvrir-un-livre-de-la-bible">Découvrir un livre de la Bible</a>
+            </li>
+            <li><a href="#exemple-6--jouer-au-défi-des-livres">Jouer au défi des livres</a>
+            </li>
+            <li><a href="#exemple-7--chercher-un-verset-ou-un-mot">Chercher un verset ou un mot</a>
+            </li>
+            <li><a href="#exemple-8--garder-un-verset-et-le-partager">Garder un verset et le partager</a>
+            </li>
+            <li><a href="#exemple-9--suivre-vos-progrès">Suivre vos progrès</a>
+            </li>
+            <li><a href="#exemple-10--adapter-lapplication-à-vos-besoins">Adapter l'application à vos besoins</a>
+            </li></ol>
+            </li>
+            <li><a href="#questions-fréquentes">Questions fréquentes</a>
+            </li></ul>
+            </nav>
+            <hr/>
+            <h2 id="visite-rapide">Visite rapide</h2>
+            <p>Quiz Biblique est organisée en <strong>4 onglets</strong>, en bas de l'écran :</p>
+            <div class="tableau"><table>
+            <tr>
+            <th>Onglet</th>
+            <th>À quoi il sert</th>
+            </tr>
+            <tr>
+            <td><strong>Accueil</strong></td>
+            <td>La leçon à suivre, votre série de jours, les questions <strong>À revoir</strong>, le <strong>Verset du jour</strong>, le <strong>Quiz sur mes lectures</strong> et le défi <strong>Dans quel livre ?</strong>. En haut à droite, la loupe ouvre <strong>Rechercher</strong> et la roue dentée ouvre les <strong>Réglages</strong>.</td>
+            </tr>
+            <tr>
+            <td><strong>Parcours</strong></td>
+            <td>Les leçons, rangées en parcours, et <strong>Les 66 livres</strong> : une fiche par livre de la Bible.</td>
+            </tr>
+            <tr>
+            <td><strong>Bible</strong></td>
+            <td>La lecture libre de la Bible, chapitre par chapitre. L'application reprend là où vous vous étiez arrêté.</td>
+            </tr>
+            <tr>
+            <td><strong>Progrès</strong></td>
+            <td><strong>Vos progrès</strong> : série, leçons terminées, bonnes réponses, <strong>Ma lecture de la Bible</strong> et vos <strong>Versets mis de côté</strong>.</td>
+            </tr>
+            </table></div>
+            <p>Les parcours proposés :</p>
+            <div class="tableau"><table>
+            <tr>
+            <th>Parcours</th>
+            <th>Leçons</th>
+            <th>Ce que vous y découvrez</th>
+            </tr>
+            <tr>
+            <td><strong>Le grand récit</strong></td>
+            <td>17</td>
+            <td>Le fil de la Bible, de la création à la nouvelle création</td>
+            </tr>
+            <tr>
+            <td><strong>Qui est Dieu ?</strong></td>
+            <td>11</td>
+            <td>Ce que la Bible dit de Dieu, avec ses propres mots</td>
+            </tr>
+            <tr>
+            <td><strong>Jésus</strong></td>
+            <td>15</td>
+            <td>Ce que les Évangiles racontent de ses paroles et de ses actes</td>
+            </tr>
+            <tr>
+            <td><strong>Les grands thèmes</strong></td>
+            <td>13</td>
+            <td>Le pardon, la foi, la prière, l'amour, la justice, l'espérance…</td>
+            </tr>
+            <tr>
+            <td><strong>Des hommes et des femmes</strong></td>
+            <td>16</td>
+            <td>Noé, Abraham, Ruth, David, Esther, Marie, Pierre, Paul…</td>
+            </tr>
+            <tr>
+            <td><strong>Prier et méditer : Psaumes et sagesse</strong></td>
+            <td>12</td>
+            <td>Psaumes, Proverbes, Ecclésiaste, Job</td>
+            </tr>
+            <tr>
+            <td><strong>Les 66 livres</strong></td>
+            <td>66 fiches</td>
+            <td>De quoi parle chaque livre, qui l'a écrit, un verset clé et un quiz</td>
+            </tr>
+            </table></div>
+            <div class="attention"><p><strong>Bon à savoir</strong> : toutes les leçons existent en français et en anglais. La traduction de la Bible suit la langue de l'application : Louis Segond en français, King James en anglais.</p></div>
+            <hr/>
+            <h2 id="premier-lancement">Premier lancement</h2>
+            <p><strong>Installer l'application</strong></p>
+            <ol>
+            <li>Sur votre téléphone Android, ouvrez la page de téléchargement : https://iyf.ebng.world/apps/quiz-biblique
+            </li>
+            <li>Touchez <strong>Télécharger</strong>.
+            </li>
+            <li>Ouvrez le fichier téléchargé. Si Android vous le demande, autorisez l'installation depuis cette source, puis touchez <strong>Installer</strong>.
+            </li></ol>
+            <p><strong>La première ouverture</strong></p>
+            <p>L'écran <strong>Bienvenue</strong> présente l'application en un coup d'œil :</p>
+            <ol>
+            <li>Le principe, en trois points : lire un court passage, répondre à quelques questions, puis lire l'explication qui renvoie au verset.
+            </li>
+            <li>Un rappel : tout fonctionne sans Internet.
+            </li>
+            <li><strong>Langue</strong> : choisissez <strong>Français</strong> ou <strong>English</strong>.
+            </li>
+            <li>Touchez <strong>Commencer</strong>. Vous arrivez sur l'<strong>Accueil</strong>.
+            </li></ol>
+            <p>Aucun compte n'est demandé. Vous pourrez changer la langue plus tard dans les <strong>Réglages</strong>.</p>
+            <hr/>
+            <h2 id="exemple-1--suivre-votre-première-leçon">Exemple 1 : suivre votre première leçon</h2>
+            <div class="exemple"><p><strong>Situation</strong> : Aya ouvre l'application pour la première fois. Elle veut commencer par le début de la Bible.</p></div>
+            <p><strong>Étape 1 : ouvrir la leçon</strong></p>
+            <ol>
+            <li>Sur l'<strong>Accueil</strong>, la grande carte <strong>Pour commencer</strong> propose la première leçon : <em>Au commencement</em>, du parcours <strong>Le grand récit</strong>.
+            </li>
+            <li>Touchez <strong>Lire et répondre</strong>.
+            </li></ol>
+            <p>Vous pouvez aussi choisir une autre leçon : ouvrez l'onglet <strong>Parcours</strong>, touchez un parcours, puis une leçon. La leçon conseillée est entourée d'une bordure de couleur.</p>
+            <p><strong>Étape 2 : lire le passage</strong></p>
+            <ol>
+            <li>En haut, la carte <strong>Avant de lire</strong> donne un peu de contexte. Elle indique aussi les références du passage et le nombre de versets.
+            </li>
+            <li>Lisez le passage, tranquillement.
+            </li>
+            <li>Quand vous avez fini, touchez <strong>J'ai lu : aux questions</strong> en bas de l'écran. Le nombre de questions est indiqué entre parenthèses.
+            </li></ol>
+            <div class="attention"><p><strong>Astuce</strong> : l'icône de traduction, en haut à droite, affiche sous chaque verset l'autre traduction (King James ou Segond). Touchez-la à nouveau pour la masquer.</p></div>
+            <p><strong>Étape 3 : répondre aux questions</strong></p>
+            <ol>
+            <li>En haut, vous voyez <em>Question 1 sur 5</em>.
+            </li>
+            <li>Touchez la réponse de votre choix. Certaines questions se répondent par <strong>Vrai</strong> ou <strong>Faux</strong>.
+            </li>
+            <li>La correction s'affiche tout de suite :
+            <ul>
+            <li><strong>Bonne réponse !</strong> si vous avez trouvé ;
+            </li>
+            <li><strong>Pas tout à fait</strong> sinon, avec <strong>La bonne réponse</strong>.
+            </li></ul>
+            </li>
+            <li>Lisez l'explication. Le bouton <strong>Lire</strong> suivi de la référence (par exemple <em>Lire Genèse 1:3</em>) montre le verset concerné.
+            </li>
+            <li>Touchez <strong>Suivant</strong>. À la dernière question, touchez <strong>Voir le résultat</strong>.
+            </li></ol>
+            <p><strong>Étape 4 : le résultat</strong></p>
+            <ol>
+            <li>Votre score s'affiche, par exemple <em>4 / 5</em>, avec un petit message d'encouragement.
+            </li>
+            <li>La rubrique <strong>À revoir</strong> rappelle les questions ratées et leur bonne réponse.
+            </li>
+            <li><strong>À retenir</strong> résume ce que dit le passage.
+            </li>
+            <li><strong>Verset clé</strong> montre le verset principal de la leçon. Pour cette leçon : <em>« Au commencement, Dieu créa les cieux et la terre. »</em> (Genèse 1:1).
+            </li>
+            <li>Choisissez ensuite :
+            <ul>
+            <li><strong>Leçon suivante</strong> pour continuer le parcours ;
+            </li>
+            <li><strong>Relire le passage</strong> pour revoir le texte ;
+            </li>
+            <li><strong>Terminer</strong> pour revenir à l'écran précédent.
+            </li></ul>
+            </li></ol>
+            <div class="attention"><p><strong>Bon à savoir</strong> : si vous quittez une leçon au milieu des questions, l'application demande <strong>Quitter ?</strong>. Vos réponses à cette série ne seront pas enregistrées. Touchez <strong>Continuer</strong> pour rester, ou <strong>Quitter</strong> pour sortir.</p></div>
+            <hr/>
+            <h2 id="exemple-2--réviser-les-questions-ratées">Exemple 2 : réviser les questions ratées</h2>
+            <div class="exemple"><p><strong>Situation</strong> : hier, Koffi a raté deux questions sur l'histoire de Noé. Il veut les revoir pour bien retenir.</p></div>
+            <ol>
+            <li>Ouvrez l'<strong>Accueil</strong>. Quand des questions sont à revoir, la carte <strong>À revoir</strong> apparaît, par exemple <em>2 questions à revoir aujourd'hui</em>.
+            </li>
+            <li>Touchez <strong>Réviser</strong>.
+            </li>
+            <li>Répondez comme dans une leçon. Chaque réponse est corrigée et expliquée.
+            </li>
+            <li>À la fin, touchez <strong>Terminer</strong>, ou <strong>Refaire les questions</strong> pour recommencer.
+            </li></ol>
+            <p>Comment l'application choisit les questions :</p>
+            <ul>
+            <li>une question ratée revient <strong>le lendemain</strong> ;
+            </li>
+            <li>une question réussie revient plus tard, puis de plus en plus rarement ;
+            </li>
+            <li>après plusieurs bonnes réponses, elle est <strong>acquise</strong> et ne revient plus.
+            </li></ul>
+            <div class="attention"><p><strong>Bon à savoir</strong> : une séance de révision reste courte, avec 12 questions au plus. La carte <strong>À revoir</strong> se trouve aussi dans l'onglet <strong>Progrès</strong>. Quand il n'y a rien à revoir, l'application l'indique.</p></div>
+            <hr/>
+            <h2 id="exemple-3--lire-la-bible-librement">Exemple 3 : lire la Bible librement</h2>
+            <div class="exemple"><p><strong>Situation</strong> : Mariam veut lire l'Évangile de Marc, un chapitre chaque soir.</p></div>
+            <p><strong>Étape 1 : choisir le livre et le chapitre</strong></p>
+            <ol>
+            <li>Ouvrez l'onglet <strong>Bible</strong>. La première fois, la lecture s'ouvre sur <em>Jean 1</em>.
+            </li>
+            <li>Touchez le titre en haut de l'écran (par exemple <em>Jean 1</em> et sa petite flèche).
+            </li>
+            <li>La fenêtre <strong>Choisir un livre</strong> s'ouvre, avec l'<strong>Ancien Testament</strong> et le <strong>Nouveau Testament</strong>. Touchez <em>Marc</em>.
+            </li>
+            <li>Choisissez le chapitre, par exemple <em>1</em>.
+            </li></ol>
+            <p><strong>Étape 2 : lire</strong></p>
+            <ol>
+            <li>Lisez le chapitre jusqu'en bas.
+            </li>
+            <li>En bas du chapitre, touchez <strong>Suivant</strong> pour passer au chapitre suivant, ou <strong>Précédent</strong> pour revenir en arrière.
+            </li>
+            <li>Le lendemain, ouvrez simplement l'onglet <strong>Bible</strong> : vous retrouvez le chapitre où vous vous étiez arrêté.
+            </li></ol>
+            <p><strong>Les chapitres lus</strong></p>
+            <p>Quand vous avez lu un chapitre assez longtemps et jusqu'à la fin, l'application le note comme lu. Le bouton en bas du chapitre devient alors <strong>Chapitre lu</strong>.</p>
+            <p>Vous pouvez aussi le noter vous-même : touchez <strong>Marquer comme lu</strong>. Vous vous êtes trompé ? Touchez <strong>Chapitre lu</strong> pour retirer la marque.</p>
+            <div class="attention"><p><strong>Astuce</strong> : en haut de l'écran, la loupe ouvre la recherche, l'icône de quiz ouvre un <strong>Quiz sur ce livre</strong>, et l'icône de traduction affiche l'autre traduction sous chaque verset.</p></div>
+            <hr/>
+            <h2 id="exemple-4--vérifier-ce-que-vous-avez-lu">Exemple 4 : vérifier ce que vous avez lu</h2>
+            <div class="exemple"><p><strong>Situation</strong> : Mariam vient de lire Marc 1. Elle veut savoir ce qu'elle a retenu. À la fin du mois, elle veut un quiz sur tout ce qu'elle a lu.</p></div>
+            <p><strong>Tester un seul chapitre</strong></p>
+            <ol>
+            <li>En bas du chapitre, touchez <strong>Tester ce chapitre</strong>.
+            </li>
+            <li>Répondez à 5 questions sur ce chapitre.
+            </li></ol>
+            <div class="attention"><p><strong>Bon à savoir</strong> : un chapitre très court ne suffit pas toujours pour un quiz. L'application vous propose alors d'essayer un quiz sur le livre entier.</p></div>
+            <p><strong>Faire un quiz sur vos lectures</strong></p>
+            <ol>
+            <li>Sur l'<strong>Accueil</strong>, carte <strong>Quiz sur mes lectures</strong>, touchez <strong>Jouer</strong>.
+            </li>
+            <li>Les livres que vous avez commencé à lire sont déjà choisis. Vous pouvez changer la sélection :
+            <ul>
+            <li><strong>Mes lectures</strong> choisit tous les livres que vous avez lus ;
+            </li>
+            <li>les boutons <strong>Pentateuque</strong>, <strong>Livres historiques</strong>, <strong>Poétiques</strong>, <strong>Prophètes</strong>, <strong>Évangiles</strong>, <strong>Actes</strong>, <strong>Épîtres</strong> et <strong>Apocalypse</strong> ajoutent ou retirent un groupe de livres ;
+            </li>
+            <li><strong>Aucun</strong> vide la sélection ;
+            </li>
+            <li>dans la liste <strong>Livres du quiz</strong>, cochez ou décochez chaque livre.
+            </li></ul>
+            </li>
+            <li>Choisissez sur quoi portent les questions :
+            <ul>
+            <li><strong>Chapitres lus</strong> : seulement les chapitres que vous avez lus ;
+            </li>
+            <li><strong>Livres entiers</strong> : tout le livre choisi.
+            </li></ul>
+            </li>
+            <li>Choisissez le <strong>Nombre de questions</strong> : 10, 15 ou 20.
+            </li>
+            <li>Touchez <strong>Commencer</strong> en bas de l'écran.
+            </li></ol>
+            <p>Pendant le quiz, une étiquette indique d'où vient chaque question, par exemple <em>Marc 1</em>. Certaines questions portent la mention <strong>Tiré du texte</strong> : elles sont construites à partir du texte biblique lui-même, par exemple compléter un verset ou retrouver l'ordre de deux passages. Le texte des versets n'est jamais modifié.</p>
+            <div class="attention"><p><strong>Astuce</strong> : dans la liste <strong>Livres du quiz</strong>, le menu à droite d'un livre permet de <strong>Marquer tout le livre comme lu</strong>, ou de <strong>Retirer « lu » pour ce livre</strong>.</p></div>
+            <hr/>
+            <h2 id="exemple-5--découvrir-un-livre-de-la-bible">Exemple 5 : découvrir un livre de la Bible</h2>
+            <div class="exemple"><p><strong>Situation</strong> : dans un groupe de jeunes, Serge prépare une rencontre sur le livre de Ruth. Il veut savoir de quoi parle ce livre avant de le lire.</p></div>
+            <ol>
+            <li>Ouvrez l'onglet <strong>Parcours</strong>, puis touchez <strong>Les 66 livres</strong>, tout en bas.
+            </li>
+            <li>Les livres sont rangés par <strong>Ancien Testament</strong> et <strong>Nouveau Testament</strong>. Touchez <em>Ruth</em>.
+            </li>
+            <li>La fiche du livre s'ouvre :
+            <ul>
+            <li>le nombre de chapitres ;
+            </li>
+            <li>un court résumé ;
+            </li>
+            <li><strong>Auteur</strong> et <strong>Époque</strong> ;
+            </li>
+            <li>les <strong>Thèmes</strong> principaux ;
+            </li>
+            <li>le <strong>Verset clé</strong>. Touchez-le pour le lire, le copier ou le partager.
+            </li></ul>
+            </li>
+            <li>Touchez <strong>Quiz</strong> pour répondre aux questions de cette fiche. Le nombre de questions est indiqué entre parenthèses.
+            </li>
+            <li>Touchez <strong>Lire le livre</strong> pour l'ouvrir au chapitre 1.
+            </li></ol>
+            <div class="attention"><p><strong>Bon à savoir</strong> : quand vous avez terminé le quiz d'une fiche, le livre est coché dans la liste des 66 livres et compte comme une leçon terminée.</p></div>
+            <hr/>
+            <h2 id="exemple-6--jouer-au-défi-des-livres">Exemple 6 : jouer au défi des livres</h2>
+            <div class="exemple"><p><strong>Situation</strong> : en famille, après le repas, les enfants veulent un petit jeu. Qui saura dans quel livre se trouve un verset ?</p></div>
+            <ol>
+            <li>Sur l'<strong>Accueil</strong>, carte <strong>Dans quel livre ?</strong>, touchez <strong>Jouer</strong>.
+            </li>
+            <li>Un verset s'affiche, avec la question <strong>Dans quel livre se trouve ce verset ?</strong>.
+            </li>
+            <li>Touchez le livre de votre choix parmi les propositions.
+            </li>
+            <li>La bonne réponse s'affiche, avec un bouton pour lire le verset.
+            </li>
+            <li>Touchez <strong>Suivant</strong>. Le défi compte 10 versets.
+            </li>
+            <li>À la fin, touchez <strong>Refaire les questions</strong> pour une nouvelle partie, ou <strong>Terminer</strong>.
+            </li></ol>
+            <div class="attention"><p><strong>Astuce</strong> : les versets changent à chaque partie. Vous pouvez lire le verset à voix haute et laisser chacun proposer sa réponse avant de toucher l'écran.</p></div>
+            <hr/>
+            <h2 id="exemple-7--chercher-un-verset-ou-un-mot">Exemple 7 : chercher un verset ou un mot</h2>
+            <div class="exemple"><p><strong>Situation</strong> : Paul se souvient d'un passage où il est question d'un berger et de ses brebis, mais pas de la référence.</p></div>
+            <p><strong>Chercher par mots</strong></p>
+            <ol>
+            <li>Sur l'<strong>Accueil</strong> ou dans l'onglet <strong>Bible</strong>, touchez la loupe pour ouvrir <strong>Rechercher</strong>.
+            </li>
+            <li>Tapez vos mots, par exemple <code>berger brebis</code>. L'application montre les versets qui contiennent tous ces mots, dans n'importe quel ordre.
+            </li>
+            <li>Le nombre de versets trouvés s'affiche, puis leur répartition par livre. Touchez un livre pour ne garder que ses résultats.
+            </li>
+            <li>Touchez un verset pour ouvrir son chapitre. Le verset est mis en évidence.
+            </li></ol>
+            <p><strong>Les façons de chercher</strong></p>
+            <div class="tableau"><table>
+            <tr>
+            <th>Je tape…</th>
+            <th>Ce que je trouve</th>
+            </tr>
+            <tr>
+            <td><code>berger brebis</code></td>
+            <td>Les versets qui contiennent ces deux mots</td>
+            </tr>
+            <tr>
+            <td><code>"que la lumière soit"</code></td>
+            <td>L'expression exacte, entre guillemets</td>
+            </tr>
+            <tr>
+            <td><code>berger -loup</code></td>
+            <td>Les versets avec <em>berger</em>, mais sans <em>loup</em></td>
+            </tr>
+            <tr>
+            <td><code>Jean 3:16</code></td>
+            <td>Le bouton <strong>Aller à Jean 3:16</strong>, qui ouvre directement le passage</td>
+            </tr>
+            </table></div>
+            <p>Les accents et les majuscules ne comptent pas. Un mot trouve aussi les mots qui commencent par lui : <em>pardon</em> trouve aussi <em>pardonne</em>.</p>
+            <p><strong>Affiner la recherche</strong></p>
+            <p>Sous la zone de saisie, des boutons permettent de chercher dans <strong>Toute la Bible</strong>, l'<strong>Ancien Testament</strong>, le <strong>Nouveau Testament</strong> ou un seul livre (<strong>Livre…</strong>). Le bouton <strong>Mots entiers</strong> ne garde que les mots exacts. Le bouton <strong>LSG</strong> ou <strong>KJV</strong> fait passer la recherche d'une traduction à l'autre.</p>
+            <div class="attention"><p><strong>Astuce</strong> : vos <strong>Recherches récentes</strong> s'affichent quand la zone de saisie est vide. Touchez-en une pour la relancer, ou <strong>Tout effacer</strong>. L'icône <strong>?</strong> en haut à droite rappelle <strong>Comment chercher</strong>.</p></div>
+            <hr/>
+            <h2 id="exemple-8--garder-un-verset-et-le-partager">Exemple 8 : garder un verset et le partager</h2>
+            <div class="exemple"><p><strong>Situation</strong> : Aya a trouvé un verset qui l'encourage. Elle veut le garder et l'envoyer à une amie.</p></div>
+            <ol>
+            <li>Dans un passage ou dans l'onglet <strong>Bible</strong>, touchez le verset.
+            </li>
+            <li>Une fenêtre s'ouvre en bas de l'écran, avec le texte du verset et trois boutons :
+            <ul>
+            <li><strong>Mettre de côté</strong> : le verset est gardé dans vos <strong>Versets mis de côté</strong> ;
+            </li>
+            <li><strong>Copier</strong> : le verset et sa référence sont copiés, prêts à coller dans un message ;
+            </li>
+            <li><strong>Partager</strong> : le verset part directement dans l'application de votre choix, par exemple WhatsApp.
+            </li></ul>
+            </li>
+            <li>Pour retrouver vos versets, ouvrez l'onglet <strong>Progrès</strong>, rubrique <strong>Versets mis de côté</strong>. Touchez un verset pour l'ouvrir dans son chapitre.
+            </li></ol>
+            <p>Le <strong>Verset du jour</strong>, sur l'<strong>Accueil</strong>, change chaque jour. Touchez-le pour le garder ou le partager de la même façon.</p>
+            <div class="attention"><p><strong>Bon à savoir</strong> : pour retirer un verset mis de côté, touchez l'icône à droite du verset dans l'onglet <strong>Progrès</strong>. Un message propose <strong>Annuler</strong> pendant quelques secondes, en cas d'erreur.</p></div>
+            <hr/>
+            <h2 id="exemple-9--suivre-vos-progrès">Exemple 9 : suivre vos progrès</h2>
+            <div class="exemple"><p><strong>Situation</strong> : Koffi lit un peu chaque jour. Il veut voir où il en est.</p></div>
+            <p><strong>La série de jours</strong></p>
+            <p>En haut de l'<strong>Accueil</strong>, une carte affiche votre série, par exemple <em>5 jours de suite</em>. Une journée compte quand vous terminez une série de questions, ou quand vous lisez un moment dans l'onglet <strong>Bible</strong>.</p>
+            <ul>
+            <li><em>Lisez aujourd'hui pour garder votre série</em> : vous n'avez pas encore lu aujourd'hui.
+            </li>
+            <li><em>Bravo, vous avez lu aujourd'hui</em> : la journée est comptée.
+            </li></ul>
+            <p><strong>L'onglet Progrès</strong></p>
+            <ol>
+            <li>En haut, vos chiffres : <strong>Série en cours</strong>, <strong>Meilleure série</strong>, <strong>Leçons terminées</strong>, <strong>Réponses données</strong>, <strong>Bonnes réponses</strong> et <strong>Questions acquises</strong>.
+            </li>
+            <li><strong>À revoir</strong> : les questions du jour, avec le bouton <strong>Réviser</strong>.
+            </li>
+            <li><strong>Par parcours</strong> : combien de leçons vous avez terminées dans chaque parcours.
+            </li>
+            <li><strong>Ma lecture de la Bible</strong> : le nombre de chapitres lus sur 1 189, et les 66 livres. Touchez un livre pour voir ses chapitres lus.
+            <ul>
+            <li>Touchez un numéro de chapitre pour l'ouvrir.
+            </li>
+            <li>Touchez <strong>Quiz sur ce livre</strong> pour faire un quiz sur ce livre.
+            </li></ul>
+            </li>
+            <li><strong>Versets mis de côté</strong> : les versets que vous avez gardés.
+            </li></ol>
+            <hr/>
+            <h2 id="exemple-10--adapter-lapplication-à-vos-besoins">Exemple 10 : adapter l'application à vos besoins</h2>
+            <div class="exemple"><p><strong>Situation</strong> : la grand-mère d'Aya lit mieux avec de grandes lettres. Le soir, Aya préfère un écran sombre.</p></div>
+            <p>Sur l'<strong>Accueil</strong>, touchez la roue dentée en haut à droite pour ouvrir les <strong>Réglages</strong>.</p>
+            <div class="tableau"><table>
+            <tr>
+            <th>Réglage</th>
+            <th>Ce qu'il fait</th>
+            </tr>
+            <tr>
+            <td><strong>Langue</strong></td>
+            <td><strong>Celle du téléphone</strong>, <strong>Français · Louis Segond 1910</strong> ou <strong>English · King James Version</strong>. La traduction de la Bible change avec la langue.</td>
+            </tr>
+            <tr>
+            <td><strong>Thème</strong></td>
+            <td><strong>Celui du téléphone</strong>, <strong>Clair</strong> ou <strong>Sombre</strong>.</td>
+            </tr>
+            <tr>
+            <td><strong>Taille du texte</strong></td>
+            <td>Glissez le curseur pour agrandir ou réduire le texte biblique. Un verset d'exemple montre le résultat.</td>
+            </tr>
+            <tr>
+            <td><strong>Lecture bilingue</strong></td>
+            <td>Affiche sous chaque verset l'autre traduction (KJV ou Segond).</td>
+            </tr>
+            <tr>
+            <td><strong>À propos</strong></td>
+            <td>Les textes utilisés et le numéro de version de l'application.</td>
+            </tr>
+            </table></div>
+            <p><strong>Effacer ma progression</strong></p>
+            <p>Tout en bas des <strong>Réglages</strong>, le bouton <strong>Effacer ma progression</strong> efface les leçons terminées, les révisions, la série et les chapitres lus. Vos versets mis de côté et vos réglages sont conservés. Touchez <strong>Confirmer</strong> pour effacer, ou <strong>Annuler</strong>.</p>
+            <div class="attention"><p><strong>Bon à savoir</strong> : cette action est définitive. Elle peut servir, par exemple, avant de prêter le téléphone à une autre personne qui veut commencer depuis le début.</p></div>
+            <hr/>
+            <h2 id="questions-fréquentes">Questions fréquentes</h2>
+            <p><strong>Faut-il Internet ?</strong><br/>Non. Les leçons, la Bible, la recherche et les quiz fonctionnent hors connexion. Internet sert seulement pour partager un verset, et pour savoir si une nouvelle version existe.</p>
+            <p><strong>Faut-il créer un compte ?</strong><br/>Non. Aucun compte n'est demandé. Votre progression reste sur votre téléphone.</p>
+            <p><strong>Comment mettre l'application à jour ?</strong><br/>Quand une nouvelle version est publiée, un bandeau dans l'application vous le signale ; touchez-le pour la télécharger depuis la page de téléchargement. Cette vérification demande une connexion à Internet.</p>
+            <p><strong>Quelle traduction de la Bible est utilisée ?</strong><br/>En français, la Louis Segond 1910. En anglais, la King James Version 1769. Les deux sont dans le domaine public.</p>
+            <p><strong>L'application est-elle liée à une Église en particulier ?</strong><br/>Non. Les questions portent sur ce que dit le texte biblique, sans prendre parti entre les Églises. Chaque réponse renvoie au verset qui la justifie.</p>
+            <p><strong>J'ai quitté une leçon au milieu. Mes réponses sont-elles gardées ?</strong><br/>Non. Une série de questions est enregistrée seulement quand vous la terminez. Recommencez la leçon depuis l'onglet <strong>Parcours</strong> ou depuis l'<strong>Accueil</strong>.</p>
+            <p><strong>Je ne vois pas la carte À revoir sur l'Accueil. Est-ce normal ?</strong><br/>Oui. Elle apparaît seulement quand des questions sont à revoir aujourd'hui. Une question ratée revient le lendemain.</p>
+            <p><strong>Pourquoi le bouton Chapitres lus est-il grisé dans le Quiz sur mes lectures ?</strong><br/>Aucun des livres choisis n'a encore de chapitre lu. Choisissez <strong>Livres entiers</strong>, ou lisez d'abord quelques chapitres dans l'onglet <strong>Bible</strong>.</p>
+            <p><strong>Puis-je lire en français et en anglais en même temps ?</strong><br/>Oui. Activez <strong>Réglages → Lecture bilingue</strong>, ou touchez l'icône de traduction en haut d'une leçon ou de l'onglet <strong>Bible</strong>.</p>
+            <p><strong>Comment passer l'application en anglais ?</strong><br/><strong>Réglages → Langue → English · King James Version</strong>.</p>
+        </t>
+    </template>
+
+    <template id="report_user_guide">
+        <t t-call="web.html_container">
+            <!-- `docs`, et non `doc` : le rendu expose le RECORDSET. -->
+            <t t-foreach="docs" t-as="doc">
+            <!-- `web.basic_layout` pose le `div.article` que l'impression
+                 cherche. Sans lui, Odoo transmet le corps brut à wkhtmltopdf,
+                 sans déclaration d'encodage, et chaque accent sort abîmé. -->
+            <t t-call="web.basic_layout">
+            <div class="page">
+                <style>
+                    .page { font-family: Helvetica, Arial, sans-serif;
+                            color: #1a1a1a; font-size: 11pt; line-height: 1.5; }
+                    .page h1 { font-size: 20pt; margin: 0 0 4px; }
+                    .page h2 { font-size: 13pt; margin: 20px 0 8px;
+                               border-bottom: 1px solid #ddd; padding-bottom: 4px;
+                               page-break-after: avoid; }
+                    .page h3 { font-size: 11pt; margin: 14px 0 6px; color: #1E3A5F;
+                               page-break-after: avoid; }
+                    .page table { width: 100%; border-collapse: collapse;
+                                  margin: 0 0 14px; font-size: 9.5pt; }
+                    .page tr { page-break-inside: avoid; }
+                    .page th, .page td { border: 1px solid #ddd; padding: 6px 8px;
+                                         text-align: left; vertical-align: top; }
+                    .page th { background: #f5f5f5; }
+                    .page .attention { border-left: 3px solid #1E3A5F;
+                                       background: #fafafa; padding: 10px 14px;
+                                       margin: 0 0 14px; page-break-inside: avoid; }
+                    .page .exemple { border-left: 3px solid #1E3A5F;
+                                     background: #f4f7f6; padding: 10px 14px;
+                                     margin: 0 0 14px; font-style: italic;
+                                     page-break-inside: avoid; }
+                    .page .attention p, .page .exemple p { margin: 0; }
+                    .page code { background: #f0f0f0; padding: 1px 4px; font-size: 9.5pt; }
+                    .page .sommaire a { color: #444; text-decoration: none; }
+                    .page .capture { text-align: center; margin: 0 0 16px;
+                                     page-break-inside: avoid; }
+                    .page .capture img { max-width: 62mm; border: 1px solid #ddd;
+                                         border-radius: 4px; }
+                    .page hr { border: 0; border-top: 1px solid #eee; margin: 18px 0; }
+                    .page .titre { border-bottom: 2px solid #1E3A5F;
+                                   padding-bottom: 10px; margin-bottom: 18px; }
+                    .page .pied { margin-top: 26px; padding-top: 10px;
+                                  border-top: 1px solid #ddd; font-size: 9pt;
+                                  color: #666; }
+                </style>
+                <div class="titre">
+                    <h1>Guide d'utilisation</h1>
+                    <div t-esc="doc.name"/>
+                </div>
+                <!-- Captures INCORPORÉES : wkhtmltopdf rappellerait sinon le
+                     serveur, qui ne peut pas répondre pendant ce rendu. -->
+                <t t-set="guide_image_mode" t-value="'data'"/>
+                <t t-set="app" t-value="doc"/>
+                <t t-call="biblical_quiz_backend.user_guide_content"/>
+                <div class="pied" t-if="doc.support_note">
+                    <t t-esc="doc.support_note"/>
+                </div>
+            </div>
+            </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Sur `mobile.app` : le socle refuse d'imprimer un guide déclaré sur un
+         autre modèle (il serait rendu sur le mauvais enregistrement). -->
+    <record id="action_report_user_guide" model="ir.actions.report">
+        <field name="name">Guide utilisateur — Quiz Biblique</field>
+        <field name="model">mobile.app</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">biblical_quiz_backend.report_user_guide</field>
+        <field name="report_file">biblical_quiz_backend.report_user_guide</field>
+        <field name="print_report_name">'Guide - %s' % (object.name)</field>
+        <field name="binding_model_id" eval="False"/>
+    </record>
+
+</odoo>

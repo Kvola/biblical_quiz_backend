@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- La déclaration de l'application au catalogue `/apps`.
+
+     SANS `noupdate` : ce qui est décrit ici appartient au code. Les VERSIONS,
+     avec leur APK, appartiennent au gestionnaire et n'y figurent pas.
+     `support_note` n'est volontairement pas livré : le socle lui donne une
+     valeur de départ, que le gestionnaire retouche depuis le back-office.
+-->
+<odoo>
+    <data>
+        <record id="mobile_app_quiz_biblique" model="mobile.app">
+            <field name="name">Quiz Biblique</field>
+            <field name="slug">quiz-biblique</field>
+            <field name="sequence">70</field>
+            <field name="summary">Lisez la Bible passage par passage, puis vérifiez ce que vous avez compris, sans Internet et sans compte</field>
+            <field name="icon" type="base64" file="biblical_quiz_backend/static/description/icon.png"/>
+            <!-- minSdk = flutter.minSdkVersion, soit 24 : Android 7.0. -->
+            <field name="min_android">7.0</field>
+            <field name="first_run_note">Ouvrez l'application : aucun compte à créer, elle fonctionne entièrement sans Internet.</field>
+            <field name="guide_template_xmlid">biblical_quiz_backend.user_guide_content</field>
+            <field name="guide_report_xmlid">biblical_quiz_backend.action_report_user_guide</field>
+            <field name="description" type="html">
+                <div>
+                    <p>
+                        Un compagnon de lecture de la Bible, en français
+                        (<strong>Louis Segond 1910</strong>) et en anglais
+                        (King James Version 1769).
+                    </p>
+                    <p>
+                        <strong>Lire, puis comprendre.</strong> Pour chaque
+                        leçon, vous lisez un court passage, puis quelques
+                        questions vérifient ce que vous avez compris ; chaque
+                        réponse est expliquée et renvoie au verset qui la
+                        justifie.
+                    </p>
+                    <p>
+                        Six parcours, une fiche pour chacun des 66 livres, une
+                        révision des questions ratées, des quiz sur vos propres
+                        lectures et une recherche dans toute la Bible.
+                    </p>
+                    <p>
+                        Les questions s'en tiennent à ce que dit le texte, sans
+                        prendre parti entre les Églises.
+                        <strong>Sans Internet et sans compte</strong> : vos
+                        progrès restent sur votre téléphone.
+                    </p>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>
