@@ -49,6 +49,8 @@
             <li><a href="#exemple-9--suivre-vos-progrès">Suivre vos progrès</a>
             </li>
             <li><a href="#exemple-10--adapter-lapplication-à-vos-besoins">Adapter l'application à vos besoins</a>
+            </li>
+            <li><a href="#exemple-11--prendre-des-notes-pendant-une-prédication">Prendre des notes pendant une prédication</a>
             </li></ol>
             </li>
             <li><a href="#utiliser-lapplication-dans-le-navigateur">Utiliser l'application dans le navigateur</a>
@@ -58,7 +60,7 @@
             </nav>
             <hr/>
             <h2 id="visite-rapide">Visite rapide</h2>
-            <p>Quiz Biblique est organisée en <strong>4 onglets</strong>, en bas de l'écran :</p>
+            <p>Quiz Biblique est organisée en <strong>5 onglets</strong>, en bas de l'écran :</p>
             <div class="tableau"><table>
             <tr>
             <th>Onglet</th>
@@ -75,6 +77,10 @@
             <tr>
             <td><strong>Bible</strong></td>
             <td>La lecture libre de la Bible, chapitre par chapitre. L'application reprend là où vous vous étiez arrêté.</td>
+            </tr>
+            <tr>
+            <td><strong>Notes</strong></td>
+            <td>Vos <strong>notes de prédication</strong>, avec les passages cités.</td>
             </tr>
             <tr>
             <td><strong>Progrès</strong></td>
@@ -162,7 +168,7 @@
             <td>« Le juste vivra par la foi » : une vie menée dans la confiance en Dieu</td>
             </tr>
             </table></div>
-            <p>Au bas de chaque parcours, le <strong>Bilan du parcours</strong> propose 10 questions tirées de toutes ses leçons : idéal pour vérifier ce que vous avez retenu une fois les leçons terminées.</p>
+            <p>Au bas de chaque parcours, le <strong>Bilan du parcours</strong> propose 10 questions tirées de toutes ses leçons : idéal pour vérifier ce que vous avez retenu une fois les leçons terminées. À la fin de la dernière leçon d'un parcours, l'application propose ce bilan, puis le <strong>Parcours suivant</strong> de la même section ; l'<strong>Accueil</strong> fait de même et conseille la suite logique (après <strong>Le péché</strong>, <strong>La loi</strong>, etc.).</p>
             <div class="attention"><p><strong>Bon à savoir</strong> : toutes les leçons existent en français et en anglais. La traduction de la Bible suit la langue de l'application : Louis Segond en français, King James en anglais.</p></div>
             <hr/>
             <h2 id="premier-lancement">Premier lancement</h2>
@@ -489,6 +495,54 @@
             <p>Tout en bas des <strong>Réglages</strong>, le bouton <strong>Effacer ma progression</strong> efface les leçons terminées, les révisions, la série et les chapitres lus. Vos versets mis de côté et vos réglages sont conservés. Touchez <strong>Confirmer</strong> pour effacer, ou <strong>Annuler</strong>.</p>
             <div class="attention"><p><strong>Bon à savoir</strong> : cette action est définitive. Elle peut servir, par exemple, avant de prêter le téléphone à une autre personne qui veut commencer depuis le début.</p></div>
             <hr/>
+            <h2 id="exemple-11--prendre-des-notes-pendant-une-prédication">Exemple 11 : prendre des notes pendant une prédication</h2>
+            <div class="exemple"><p><strong>Situation</strong> : dimanche, à l'église, le pasteur prêche sur « Un cœur nouveau ». Il fait lire Ézéchiel 36:26 et le Psaume 51:12. Aya veut garder ce qu'elle retient, avec les passages.</p></div>
+            <p><strong>Créer la note</strong></p>
+            <ol>
+            <li>Ouvrez l'onglet <strong>Notes</strong>, puis touchez <strong>Nouvelle note</strong>.
+            </li>
+            <li>En haut, écrivez le titre : <em>Un cœur nouveau</em>. Le jour de la prédication est celui d'aujourd'hui ; touchez-le pour le changer.
+            </li>
+            <li>Si vous le souhaitez, écrivez le <strong>Prédicateur</strong> et le <strong>Lieu, Église</strong>.
+            </li>
+            <li>Dans <strong>Notes</strong>, écrivez ce que vous retenez, à votre rythme.
+            </li></ol>
+            <p>Tout est <strong>enregistré automatiquement</strong> : il n'y a pas de bouton à toucher, et rien n'est perdu si vous quittez l'écran. Tant que la note est ouverte, <strong>l'écran reste allumé</strong> : le téléphone ne se verrouille pas pendant la prédication.</p>
+            <div class="attention"><p><strong>Bon à savoir</strong> : pour aller plus vite, dictez vos notes. Touchez le champ <strong>Notes</strong>, puis le <strong>micro</strong> du clavier, et parlez : le texte s'écrit tout seul. Relisez-le ensuite, la dictée se trompe parfois sur les noms propres.</p></div>
+            <p><strong>Associer les passages</strong></p>
+            <ul>
+            <li>Touchez <strong>Ajouter un passage</strong>, puis écrivez la référence : <em>Ez 36:26</em>, <em>Jean 3:16-18</em>, <em>Ps 23</em> (tout le psaume), <em>1 Co 13:4-7</em>… Le début du texte s'affiche pour vérifier ; touchez <strong>Ajouter</strong>.
+            </li>
+            <li>Plus simple encore : tapez les références directement dans vos notes (<em>« Lire Ézéchiel 36:26 »</em>). L'application les repère et les propose sous le texte : <strong>touchez-en une pour l'ajouter</strong>.
+            </li>
+            <li>Touchez un passage ajouté pour le lire ; la petite croix le retire (<strong>Annuler</strong> le remet).
+            </li>
+            <li>L'icône en forme de livre, en haut, ouvre <strong>Lire les passages</strong> : tous les passages de la note, à la suite.
+            </li></ul>
+            <div class="attention"><p><strong>Bon à savoir</strong> : beaucoup de Bibles Segond imprimées numérotent les Psaumes autrement (le titre y compte comme verset 1). Si vous écrivez <em>Psaume 51:12</em>, l'application demande d'où vient ce numéro : choisissez <strong>Ma Bible imprimée (Segond)</strong> si vous l'avez lu dans votre Bible, et elle ajoute le bon verset (<em>Psaumes 51:10</em> dans l'application, « Ô Dieu ! crée en moi un cœur pur »).</p></div>
+            <p><strong>Depuis la Bible</strong></p>
+            <p>En lisant, touchez un verset, puis <strong>Ajouter à une note</strong> : choisissez une note récente ou <strong>Nouvelle note</strong>. Sous le verset, <strong>Dans vos notes</strong> rappelle les notes qui le citent déjà.</p>
+            <p><strong>Retrouver, partager, sauvegarder</strong></p>
+            <ul>
+            <li>L'onglet <strong>Notes</strong> liste vos notes, la plus récente prédication d'abord. Le champ <strong>Rechercher dans mes notes</strong> trouve un mot du titre, du prédicateur, du lieu, des notes ou des passages.
+            </li>
+            <li>Dans une note, l'icône de partage propose :
+            <ul>
+            <li><strong>WhatsApp</strong> : la note s'ouvre dans WhatsApp, mise en forme (titre et passages en gras), prête à envoyer à un contact ou à un groupe ;
+            </li>
+            <li><strong>Autre application (e-mail, SMS…)</strong> : la note en texte simple ;
+            </li>
+            <li><strong>Copier le texte</strong> : pour la coller où vous voulez.
+            </li></ul>
+            </li></ul>
+            <p>Les passages courts (5 versets au plus) sont cités en entier ; les plus longs, par leur référence.</p>
+            <ul>
+            <li><strong>Tester ces passages</strong>, sous les passages de la note : un quiz sur les chapitres des passages lus pendant la prédication, pour vérifier ce que vous avez retenu.
+            </li>
+            <li>Le menu <strong>⋮</strong> de l'onglet <strong>Notes</strong> propose <strong>Sauvegarder mes notes</strong> (un fichier à garder dans Drive, à vous envoyer par e-mail…) et <strong>Restaurer une sauvegarde</strong>. Restaurer n'efface rien : une note déjà présente n'est remplacée que si la sauvegarde en a une version plus récente.
+            </li></ul>
+            <div class="attention"><p><strong>Bon à savoir</strong> : vos notes restent sur votre téléphone. Sauvegardez-les de temps en temps : c'est ce qui permet de les retrouver sur un nouveau téléphone. <strong>Effacer ma progression</strong> ne touche pas à vos notes.</p></div>
+            <hr/>
             <h2 id="utiliser-lapplication-dans-le-navigateur">Utiliser l'application dans le navigateur</h2>
             <p>Quiz Biblique existe aussi en <strong>version web</strong> : elle s'ouvre dans le navigateur, sans rien installer. C'est la solution pour un <strong>iPhone</strong>, un <strong>iPad</strong> ou un <strong>ordinateur</strong>, où l'application Android ne s'installe pas.</p>
             <p><strong>L'ouvrir</strong></p>
@@ -525,6 +579,8 @@
             <p><strong>Pourquoi le bouton Chapitres lus est-il grisé dans le Quiz sur mes lectures ?</strong><br/>Aucun des livres choisis n'a encore de chapitre lu. Choisissez <strong>Livres entiers</strong>, ou lisez d'abord quelques chapitres dans l'onglet <strong>Bible</strong>.</p>
             <p><strong>Le numéro d'un verset n'est pas le même que dans ma Bible. Pourquoi ?</strong><br/>L'application numérote les versets comme la King James, pour que le français et l'anglais aient les mêmes références. Beaucoup de Bibles Segond imprimées numérotent quelques passages autrement : dans les Psaumes surtout, le titre du psaume y compte souvent comme verset 1 (le Psaume 19:7 de l'application est le Psaume 19:8 dans votre Bible). Dans ces passages, l'application affiche aussi le numéro de la Segond imprimée (« Segond imprimée : Psaumes 19:8 ») ; dans l'onglet <strong>Bible</strong>, un encadré le signale en haut du chapitre, et toucher un verset montre son numéro sur papier.</p>
             <p><strong>À quoi sert le Bilan du parcours ?</strong><br/>À vérifier ce que vous avez retenu de tout un parcours : 10 questions tirées de ses différentes leçons, chacune avec son passage indiqué. Les questions ratées reviennent ensuite dans <strong>À revoir</strong>, comme celles des leçons.</p>
+            <p><strong>Mes notes de prédication sont-elles envoyées quelque part ?</strong><br/>Non. Elles restent sur votre téléphone. Elles n'en sortent que si vous les partagez ou si vous les sauvegardez vous-même (menu <strong>⋮</strong> de l'onglet <strong>Notes</strong>).</p>
+            <p><strong>Comment retrouver mes notes sur un nouveau téléphone ?</strong><br/>Sur l'ancien téléphone : onglet <strong>Notes</strong>, menu <strong>⋮</strong>, <strong>Sauvegarder mes notes</strong>, puis envoyez le fichier vers Drive ou par e-mail. Sur le nouveau : installez l'application, puis <strong>Notes</strong>, menu <strong>⋮</strong>, <strong>Restaurer une sauvegarde</strong>, et choisissez ce fichier.</p>
             <p><strong>Puis-je lire en français et en anglais en même temps ?</strong><br/>Oui. Activez <strong>Réglages → Lecture bilingue</strong>, ou touchez l'icône de traduction en haut d'une leçon ou de l'onglet <strong>Bible</strong>.</p>
             <p><strong>Comment passer l'application en anglais ?</strong><br/><strong>Réglages → Langue → English · King James Version</strong>.</p>
         </t>
