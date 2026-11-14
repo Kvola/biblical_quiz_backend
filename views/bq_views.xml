@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ============================== Joueurs -->
+    <record id="bq_player_view_list" model="ir.ui.view">
+        <field name="name">bq.player.list</field>
+        <field name="model">bq.player</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="banned" decoration-muted="not active">
+                <field name="pseudo"/>
+                <field name="phone"/>
+                <field name="lang"/>
+                <field name="match_id"/>
+                <field name="tournament_id"/>
+                <field name="matches_played"/>
+                <field name="matches_won"/>
+                <field name="tournaments_won"/>
+                <field name="report_count"/>
+                <field name="banned"/>
+                <field name="active" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+    <record id="bq_player_view_form" model="ir.ui.view">
+        <field name="name">bq.player.form</field>
+        <field name="model">bq.player</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_unban" type="object" string="Lever la suspension" invisible="not banned"/>
+                    <button name="action_release" type="object" string="Libérer (incident)"
+                            invisible="not match_id and not tournament_id"
+                            confirm="Le joueur pourra rejoindre une autre partie, même si celle-ci n'est pas finie. Continuer ?"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><h1><field name="pseudo"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="phone"/>
+                            <field name="lang"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="banned"/>
+                            <field name="ban_reason" invisible="not banned"/>
+                            <field name="match_id"/>
+                            <field name="tournament_id"/>
+                        </group>
+                        <group string="Statistiques">
+                            <field name="matches_played"/>
+                            <field name="matches_won"/>
+                            <field name="tournaments_won"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Signalements">
+                            <field name="report_ids">
+                                <list><field name="create_date"/><field name="reporter_id"/><field name="pseudo"/>
+                                    <field name="reason"/><field name="state"/></list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="bq_player_view_search" model="ir.ui.view">
+        <field name="name">bq.player.search</field>
+        <field name="model">bq.player</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="pseudo"/>
+                <field name="phone"/>
+                <filter name="engaged" string="En partie" domain="['|', ('match_id', '!=', False), ('tournament_id', '!=', False)]"/>
+                <filter name="banned" string="Suspendus" domain="[('banned', '=', True)]"/>
+                <filter name="archived" string="Comptes supprimés" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_bq_player" model="ir.actions.act_window">
+        <field name="name">Joueurs</field>
+        <field name="res_model">bq.player</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================== Signalements -->
+    <record id="bq_report_view_list" model="ir.ui.view">
+        <field name="name">bq.report.list</field>
+        <field name="model">bq.report</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'open'">
+                <field name="create_date"/>
+                <field name="player_id"/>
+                <field name="pseudo"/>
+                <field name="reporter_id"/>
+                <field name="reason"/>
+                <field name="state"/>
+                <button name="action_ban" type="object" string="Suspendre" icon="fa-ban" invisible="state != 'open'"/>
+                <button name="action_reject" type="object" string="Sans suite" icon="fa-times" invisible="state != 'open'"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_bq_report" model="ir.actions.act_window">
+        <field name="name">Signalements de pseudos</field>
+        <field name="res_model">bq.report</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_open': 1}</field>
+        <field name="domain">[]</field>
+    </record>
+    <record id="bq_report_view_search" model="ir.ui.view">
+        <field name="name">bq.report.search</field>
+        <field name="model">bq.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="player_id"/>
+                <filter name="open" string="À traiter" domain="[('state', '=', 'open')]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ============================== Matchs -->
+    <record id="bq_match_view_list" model="ir.ui.view">
+        <field name="name">bq.match.list</field>
+        <field name="model">bq.match</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'running'" decoration-muted="state in ('finished', 'cancelled')">
+                <field name="create_date"/>
+                <field name="code"/>
+                <field name="kind"/>
+                <field name="mode"/>
+                <field name="creator_id"/>
+                <field name="passages_label"/>
+                <field name="lang"/>
+                <field name="player_count"/>
+                <field name="state"/>
+                <field name="result" optional="show"/>
+                <field name="tournament_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="bq_match_view_form" model="ir.ui.view">
+        <field name="name">bq.match.form</field>
+        <field name="model">bq.match</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><h1><field name="code" readonly="1"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="kind" readonly="1"/>
+                            <field name="mode" readonly="1"/>
+                            <field name="creator_id" readonly="1"/>
+                            <field name="tournament_id" readonly="1" invisible="not tournament_id"/>
+                            <field name="lang" readonly="1"/>
+                            <field name="passages_label" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="question_count" readonly="1"/>
+                            <field name="question_seconds" readonly="1"/>
+                            <field name="hand_seconds" readonly="1"/>
+                            <field name="phase" readonly="1"/>
+                            <field name="result" readonly="1"/>
+                            <field name="winner_participant_id" readonly="1" invisible="not winner_participant_id"/>
+                            <field name="winner_team_id" readonly="1" invisible="not winner_team_id"/>
+                            <field name="started_at" readonly="1"/>
+                            <field name="finished_at" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Joueurs">
+                            <field name="participant_ids" readonly="1">
+                                <list><field name="rank"/><field name="player_id"/><field name="team_id"/>
+                                    <field name="score"/><field name="correct_count"/><field name="wrong_count"/>
+                                    <field name="left"/></list>
+                            </field>
+                        </page>
+                        <page string="Questions">
+                            <field name="question_ids" readonly="1">
+                                <list><field name="sequence"/><field name="prompt"/><field name="ref_label"/>
+                                    <field name="source"/><field name="is_tiebreak"/><field name="state"/>
+                                    <field name="winner_participant_id"/></list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="bq_match_view_search" model="ir.ui.view">
+        <field name="name">bq.match.search</field>
+        <field name="model">bq.match</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="code"/>
+                <field name="creator_id"/>
+                <filter name="live" string="En attente ou en cours" domain="[('state', 'in', ('lobby', 'running'))]"/>
+                <filter name="free" string="Matchs libres" domain="[('kind', '=', 'free')]"/>
+                <filter name="duel" string="Duels de tournoi" domain="[('kind', '=', 'duel')]"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_bq_match" model="ir.actions.act_window">
+        <field name="name">Matchs</field>
+        <field name="res_model">bq.match</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================== Tournois -->
+    <record id="bq_tournament_view_list" model="ir.ui.view">
+        <field name="name">bq.tournament.list</field>
+        <field name="model">bq.tournament</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'running'" decoration-muted="state in ('finished', 'cancelled')">
+                <field name="create_date"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="mode"/>
+                <field name="organizer_id"/>
+                <field name="entry_count"/>
+                <field name="state"/>
+                <field name="winner_entry_id"/>
+            </list>
+        </field>
+    </record>
+    <record id="bq_tournament_view_form" model="ir.ui.view">
+        <field name="name">bq.tournament.form</field>
+        <field name="model">bq.tournament</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+                    <button name="action_cancel" type="object" string="Annuler le tournoi"
+                            invisible="state in ('finished', 'cancelled')"
+                            confirm="Les matchs en cours sont arrêtés et tous les joueurs libérés. Continuer ?"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><h1><field name="name"/></h1><field name="code" readonly="1"/></div>
+                    <group>
+                        <group>
+                            <field name="mode" readonly="1"/>
+                            <field name="organizer_id" readonly="1"/>
+                            <field name="lang" readonly="1"/>
+                            <field name="passages_label" readonly="1"/>
+                            <field name="winner_entry_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="min_entries" readonly="1"/>
+                            <field name="max_entries" readonly="1"/>
+                            <field name="question_count" readonly="1"/>
+                            <field name="question_seconds" readonly="1"/>
+                            <field name="hand_seconds" readonly="1"/>
+                            <field name="forfeit_minutes" readonly="1"/>
+                            <field name="rounds" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Participants">
+                            <field name="entry_ids" readonly="1">
+                                <list><field name="display_name" string="Participant"/><field name="seed"/>
+                                    <field name="state"/><field name="eliminated_round"/></list>
+                            </field>
+                        </page>
+                        <page string="Duels">
+                            <field name="duel_ids" readonly="1">
+                                <list><field name="round"/><field name="position"/><field name="entry_a_id"/>
+                                    <field name="score_a"/><field name="score_b"/><field name="entry_b_id"/>
+                                    <field name="state"/><field name="result"/><field name="winner_entry_id"/>
+                                    <field name="match_id"/></list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_bq_tournament" model="ir.actions.act_window">
+        <field name="name">Tournois</field>
+        <field name="res_model">bq.tournament</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================== Réglages -->
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.quiz_biblique</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="91"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Quiz Biblique" string="Quiz Biblique" name="biblical_quiz_backend"
+                     groups="biblical_quiz_backend.group_bq_manager">
+                    <block title="Matchs" name="bq_matches">
+                        <setting string="Joueurs par match" help="Match individuel : 2 joueurs au moins, ce nombre au plus.">
+                            <field name="bq_max_players"/>
+                        </setting>
+                        <setting string="Taille des équipes" help="Joueurs par équipe : au moins, au plus. Un match par équipes oppose toujours deux équipes.">
+                            <div><field name="bq_team_min_size" class="oe_inline"/> à <field name="bq_team_max_size" class="oe_inline"/></div>
+                        </setting>
+                        <setting string="Réglages proposés par défaut" help="Le créateur d'un match peut les changer.">
+                            <div>Temps par question : <field name="bq_question_seconds_default" class="oe_inline"/> s</div>
+                            <div>Durée de la main : <field name="bq_hand_seconds_default" class="oe_inline"/> s</div>
+                            <div>Questions : <field name="bq_question_count_default" class="oe_inline"/></div>
+                            <div>Affichage de la réponse : <field name="bq_reveal_seconds" class="oe_inline"/> s</div>
+                        </setting>
+                    </block>
+                    <block title="Ressources du serveur" name="bq_limits">
+                        <setting string="Matchs simultanés" help="Matchs libres en attente ou en cours en même temps. Au-delà, la création est refusée (réessayer plus tard).">
+                            <field name="bq_max_live_matches"/>
+                        </setting>
+                        <setting string="Tournois simultanés" help="Tournois aux inscriptions ouvertes ou en cours en même temps.">
+                            <field name="bq_max_live_tournaments"/>
+                        </setting>
+                        <setting string="Participants par tournoi (au plus)">
+                            <field name="bq_tournament_max_entries"/>
+                        </setting>
+                        <setting string="Forfait d'un duel (minutes, par défaut)" help="Délai pour confirmer « Prêt » ; l'organisateur peut le changer.">
+                            <field name="bq_forfeit_minutes_default"/>
+                        </setting>
+                    </block>
+                    <block title="Comptes" name="bq_accounts">
+                        <setting string="Pays proposés à la connexion" help="Codes ISO séparés par des virgules (CI,SN,FR…).">
+                            <field name="bq_phone_countries"/>
+                        </setting>
+                        <setting string="Mots interdits dans les pseudos" help="Séparés par des virgules ; s'ajoutent à la liste livrée avec le module.">
+                            <field name="bq_banned_words"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+    <record id="action_bq_settings" model="ir.actions.act_window">
+        <field name="name">Réglages</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'module': 'biblical_quiz_backend', 'bin_size': False}</field>
+    </record>
+
+    <!-- ============================== Menus -->
+    <menuitem id="menu_bq_root" name="Quiz Biblique" sequence="62" groups="biblical_quiz_backend.group_bq_manager"
+              web_icon="biblical_quiz_backend,static/description/icon.png"/>
+    <menuitem id="menu_bq_matches" name="Matchs" parent="menu_bq_root" action="action_bq_match" sequence="10"/>
+    <menuitem id="menu_bq_tournaments" name="Tournois" parent="menu_bq_root" action="action_bq_tournament" sequence="20"/>
+    <menuitem id="menu_bq_players" name="Joueurs" parent="menu_bq_root" action="action_bq_player" sequence="30"/>
+    <menuitem id="menu_bq_reports" name="Signalements" parent="menu_bq_root" action="action_bq_report" sequence="40"/>
+    <menuitem id="menu_bq_config" name="Configuration" parent="menu_bq_root" sequence="90"/>
+    <menuitem id="menu_bq_settings" name="Réglages" parent="menu_bq_config" action="action_bq_settings" sequence="1"/>
+</odoo>

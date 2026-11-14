@@ -19,7 +19,7 @@
             <p><em>Lire et comprendre la Bible.</em></p>
             <p>Quiz Biblique est un compagnon de lecture. Vous lisez un court passage de la Bible dans l'application, puis quelques questions vérifient ce que vous avez compris. Chaque réponse est expliquée et renvoie au verset qui la justifie. L'application fonctionne <strong>sans Internet</strong> et <strong>sans compte</strong> : tout reste sur votre téléphone.</p>
             <p>Le texte biblique est celui de la <strong>Louis Segond 1910</strong> en français et de la <strong>King James Version 1769</strong> en anglais. Les questions s'en tiennent à ce que dit le texte, sans prendre parti entre les Églises. L'application convient à tous : jeunes, familles, groupes de lecture.</p>
-            <p>Ce guide commence par une visite rapide, puis présente <strong>10 exemples complets</strong>, tirés de la vie de tous les jours.</p>
+            <p>Ce guide commence par une visite rapide, puis présente <strong>14 exemples complets</strong>, tirés de la vie de tous les jours.</p>
             <hr/>
             <nav class="sommaire">
             <h2 id="sommaire">Sommaire</h2>
@@ -51,6 +51,12 @@
             <li><a href="#exemple-10--adapter-lapplication-à-vos-besoins">Adapter l'application à vos besoins</a>
             </li>
             <li><a href="#exemple-11--prendre-des-notes-pendant-une-prédication">Prendre des notes pendant une prédication</a>
+            </li>
+            <li><a href="#exemple-12--affronter-dautres-lecteurs-en-ligne">Affronter d'autres lecteurs en ligne</a>
+            </li>
+            <li><a href="#exemple-13--jouer-en-équipe">Jouer en équipe</a>
+            </li>
+            <li><a href="#exemple-14--organiser-un-tournoi">Organiser un tournoi</a>
             </li></ol>
             </li>
             <li><a href="#utiliser-lapplication-dans-le-navigateur">Utiliser l'application dans le navigateur</a>
@@ -553,6 +559,94 @@
             </li></ul>
             <div class="attention"><p><strong>Bon à savoir</strong> : vos notes restent sur votre téléphone. Sauvegardez-les de temps en temps : c'est ce qui permet de les retrouver sur un nouveau téléphone. Pour ne pas l'oublier, l'onglet <strong>Notes</strong> vous le rappelle par un encadré : une semaine après votre première note, puis un mois après chaque sauvegarde. <strong>Plus tard</strong> le fait taire pour un mois. <strong>Effacer ma progression</strong> ne touche pas à vos notes.</p></div>
             <hr/>
+            <h2 id="exemple-12--affronter-dautres-lecteurs-en-ligne">Exemple 12 : affronter d'autres lecteurs en ligne</h2>
+            <div class="exemple"><p><strong>Situation</strong> : le groupe de jeunes a lu Jean 3 cette semaine. Koffi propose un match à cinq sur ce chapitre, chacun sur son téléphone.</p></div>
+            <p>Le jeu en ligne est <strong>facultatif</strong> : tout le reste de l'application fonctionne sans compte et sans Internet. Pour jouer, il faut Internet et un <strong>compte joueur</strong>.</p>
+            <p><strong>Devenir joueur (une seule fois)</strong></p>
+            <ol>
+            <li>Sur l'<strong>Accueil</strong>, touchez <strong>Jouer avec d'autres</strong>, puis <strong>Devenir joueur</strong>.
+            </li>
+            <li>Saisissez votre numéro de téléphone, puis touchez <strong>Recevoir le code par WhatsApp</strong>.
+            </li>
+            <li>Recopiez le code reçu, puis choisissez votre <strong>pseudo</strong> (3 à 20 caractères). Les autres joueurs ne voient que lui, jamais votre numéro.
+            </li></ol>
+            <p><strong>Créer le match</strong></p>
+            <ol>
+            <li>Touchez <strong>Créer un match</strong>, puis <strong>Individuel</strong>.
+            </li>
+            <li><strong>Ajouter un passage</strong> : choisissez le livre et les chapitres (<em>Jean</em>, du chapitre 3 au chapitre 3). Activez <strong>Seulement certains versets</strong> pour un passage plus court (<em>Jean 3:1-21</em>). Ajoutez plusieurs passages si vous le souhaitez.
+            </li>
+            <li>L'application indique combien de questions ces passages permettent. S'il n'y en a pas assez, élargissez le passage ou réduisez le nombre de questions.
+            </li>
+            <li>Réglez le nombre de questions (10 par défaut), le <strong>temps par question</strong> (30 secondes par défaut) et le <strong>temps pour répondre après avoir pris la main</strong> (5 secondes par défaut).
+            </li>
+            <li>Touchez <strong>Créer le match</strong>.
+            </li></ol>
+            <p><strong>Inviter les autres</strong></p>
+            <p>La salle d'attente affiche le <strong>code du match</strong> en grand (par exemple <em>K7MP2Q</em>) et son <strong>QR code</strong>. Les autres joueurs :</p>
+            <ul>
+            <li>saisissent le code dans <strong>Jouer avec d'autres → Rejoindre</strong> ;
+            </li>
+            <li>ou scannent le QR code avec l'appareil photo de leur téléphone ;
+            </li>
+            <li>ou touchent le lien reçu avec <strong>Inviter par WhatsApp</strong>.
+            </li></ul>
+            <p>Un match se joue de 2 à 10 joueurs. Quand tout le monde est là, Koffi touche <strong>Lancer le match</strong>.</p>
+            <p><strong>Jouer</strong></p>
+            <ol>
+            <li>La question s'affiche, avec le temps qui s'écoule.
+            </li>
+            <li>Si vous connaissez la réponse, touchez vite <strong>Je réponds !</strong> Le premier qui touche <strong>prend la main</strong> : il a 5 secondes pour choisir sa réponse, et pendant ce temps <strong>le chrono de la question est en pause</strong>.
+            </li>
+            <li><strong>Bonne réponse : +10 points</strong>, et l'on passe à la question suivante.
+            </li>
+            <li><strong>Mauvaise réponse, ou main laissée filer : −5 points</strong>. Ce joueur ne peut plus répondre à cette question ; le chrono reprend et les autres peuvent prendre la main à leur tour.
+            </li>
+            <li>Si personne ne trouve avant la fin du temps, personne ne gagne ni ne perd de points.
+            </li></ol>
+            <p>Après chaque question, la bonne réponse s'affiche avec son <strong>explication</strong> et le <strong>passage</strong> à relire. À la fin, le classement s'affiche : touchez <strong>Revoir les questions</strong> pour les reprendre une à une, ou <strong>Revanche</strong> pour rejouer avec les mêmes réglages.</p>
+            <div class="attention"><p><strong>Bon à savoir</strong> : un joueur ne participe qu'à <strong>une partie à la fois</strong> (un match ou un tournoi). Quitter l'écran n'abandonne pas le match : retrouvez-le avec <strong>Reprendre</strong> dans <strong>Jouer avec d'autres</strong>. Seul le bouton <strong>Quitter</strong> l'abandonne.</p></div>
+            <div class="attention"><p><strong>Bon à savoir</strong> : pour l'école du dimanche, affichez le match en grand sur un vidéoprojecteur ou une télévision : sur l'ordinateur relié, ouvrez la version web, puis <strong>Jouer avec d'autres → Écran de projection</strong> (l'icône d'écran en haut), et saisissez le code du match. Aucun compte n'est nécessaire pour cet écran.</p></div>
+            <h2 id="exemple-13--jouer-en-équipe">Exemple 13 : jouer en équipe</h2>
+            <div class="exemple"><p><strong>Situation</strong> : à la soirée de l'église, les garçons affrontent les filles sur la parabole du semeur (Matthieu 13:1-23).</p></div>
+            <ol>
+            <li>Créez le match comme dans l'exemple 12, mais choisissez <strong>Par équipes</strong>.
+            </li>
+            <li>Dans la salle d'attente, touchez <strong>Créer une équipe</strong> et donnez-lui un nom : vous en êtes le <strong>capitaine</strong>. Un autre joueur crée la seconde équipe.
+            </li>
+            <li>Le capitaine touche <strong>Inviter un joueur</strong> et cherche son pseudo, ou touche <strong>Inviter</strong> à côté d'un joueur déjà dans la salle sans équipe. L'invité touche <strong>Accepter</strong>.
+            </li>
+            <li>Un joueur peut aussi toucher <strong>Demander à entrer</strong> sous une équipe ; son capitaine accepte ou refuse.
+            </li>
+            <li>Le match se lance quand les <strong>deux équipes</strong> comptent chacune <strong>de 2 à 5 joueurs</strong>. Les joueurs restés sans équipe ne jouent pas.
+            </li></ol>
+            <p>En équipe, <strong>n'importe quel membre</strong> peut prendre la main. S'il se trompe ou laisse filer la main, <strong>toute son équipe</strong> ne peut plus répondre à cette question. Les points de chaque membre s'additionnent pour l'équipe.</p>
+            <h2 id="exemple-14--organiser-un-tournoi">Exemple 14 : organiser un tournoi</h2>
+            <div class="exemple"><p><strong>Situation</strong> : pour la fête de la jeunesse, Aïcha organise un tournoi entre huit jeunes sur l'Évangile de Marc (chapitres 1 à 4).</p></div>
+            <p><strong>Créer le tournoi</strong></p>
+            <ol>
+            <li><strong>Jouer avec d'autres → Créer un tournoi</strong>.
+            </li>
+            <li>Donnez-lui un nom, choisissez <strong>Entre joueurs</strong> ou <strong>Entre équipes</strong> (jamais un mélange des deux), les passages, et le nombre de participants (au moins et au plus).
+            </li>
+            <li>Indiquez si vous jouez vous-même : l'organisateur n'est pas obligé de participer.
+            </li>
+            <li>Partagez le code ou le QR code du tournoi : chacun s'inscrit depuis <strong>Rejoindre</strong>. Dans un tournoi entre équipes, chaque capitaine crée son équipe dans le tournoi et invite ses membres.
+            </li></ol>
+            <p><strong>Le déroulement</strong></p>
+            <ul>
+            <li>Quand le nombre d'inscrits suffit, l'organisatrice touche <strong>Lancer le tournoi</strong>. Le tableau est tiré au sort. S'il n'y a pas un nombre « rond » de participants (4, 8, 16…), certains sont <strong>qualifiés d'office</strong> au premier tour. Les équipes incomplètes ne sont pas retenues.
+            </li>
+            <li>Les participants s'affrontent en <strong>duels</strong>, tour après tour, jusqu'à la <strong>finale</strong>. Chaque duel se joue comme un match.
+            </li>
+            <li>Quand votre duel est prêt, l'application vous prévient : touchez <strong>Prêt</strong>. Le duel commence quand les deux camps sont prêts. Passé le délai (10 minutes par défaut), le camp qui ne s'est pas déclaré prêt perd par <strong>forfait</strong>.
+            </li>
+            <li>En cas d'égalité, des <strong>questions décisives</strong> départagent les deux camps : la première bonne réponse l'emporte.
+            </li>
+            <li>Un joueur éliminé est libéré : il peut suivre le tableau, ou rejoindre une autre partie.
+            </li></ul>
+            <div class="attention"><p><strong>Bon à savoir</strong> : l'organisatrice peut choisir d'<strong>autres passages pour un tour</strong> (par exemple Marc 5 pour la finale), tant que ce tour n'a pas commencé.</p></div>
+            <hr/>
             <h2 id="utiliser-lapplication-dans-le-navigateur">Utiliser l'application dans le navigateur</h2>
             <p>Quiz Biblique existe aussi en <strong>version web</strong> : elle s'ouvre dans le navigateur, sans rien installer. C'est la solution pour un <strong>iPhone</strong>, un <strong>iPad</strong> ou un <strong>ordinateur</strong>, où l'application Android ne s'installe pas.</p>
             <p><strong>L'ouvrir</strong></p>
@@ -579,8 +673,11 @@
             <div class="attention"><p><strong>Attention (iPhone)</strong> : si la version web n'est pas sur l'écran d'accueil et que vous ne l'ouvrez pas pendant plusieurs semaines, Safari peut effacer vos progrès. Mettez-la sur l'écran d'accueil.</p></div>
             <hr/>
             <h2 id="questions-fréquentes">Questions fréquentes</h2>
-            <p><strong>Faut-il Internet ?</strong><br/>Non. Les leçons, la Bible, la recherche et les quiz fonctionnent hors connexion. Internet sert seulement pour partager un verset, et pour savoir si une nouvelle version existe.</p>
-            <p><strong>Faut-il créer un compte ?</strong><br/>Non. Aucun compte n'est demandé. Votre progression reste sur votre téléphone.</p>
+            <p><strong>Faut-il Internet ?</strong><br/>Non. Les leçons, la Bible, la recherche et les quiz fonctionnent hors connexion. Internet sert seulement pour partager un verset, pour savoir si une nouvelle version existe, et pour le jeu en ligne (<strong>Jouer avec d'autres</strong>).</p>
+            <p><strong>Faut-il créer un compte ?</strong><br/>Non. Aucun compte n'est demandé. Votre progression reste sur votre téléphone. Seul le jeu en ligne demande un compte joueur (un numéro vérifié par WhatsApp et un pseudo) ; vous pouvez le supprimer à tout moment dans <strong>Jouer avec d'autres → Mon profil de joueur</strong>.</p>
+            <p><strong>Que voient les autres joueurs de moi ?</strong><br/>Votre pseudo et vos points, rien d'autre. Votre numéro de téléphone ne sert qu'à protéger votre compte. Un pseudo déplacé peut être signalé (menu <strong>⋮</strong> à côté du joueur) ; l'équipe du serveur l'examine.</p>
+            <p><strong>Pourquoi le serveur refuse-t-il de créer un match ?</strong><br/>Pour ménager le serveur, le nombre de matchs et de tournois en même temps est limité. Réessayez quelques minutes plus tard.</p>
+            <p><strong>J'ai perdu la connexion pendant un match. Que se passe-t-il ?</strong><br/>Le match continue sans vous ; revenez dans <strong>Jouer avec d'autres → Reprendre</strong> dès que le réseau revient. C'est le serveur qui tient les chronos et décide qui a pris la main le premier, à l'heure où il reçoit l'appui.</p>
             <p><strong>Comment mettre l'application à jour ?</strong><br/>Quand une nouvelle version est publiée, un bandeau dans l'application vous le signale ; touchez-le pour la télécharger depuis la page de téléchargement. Cette vérification demande une connexion à Internet.</p>
             <p><strong>Quelle traduction de la Bible est utilisée ?</strong><br/>En français, la Louis Segond 1910. En anglais, la King James Version 1769. Les deux sont dans le domaine public.</p>
             <p><strong>L'application est-elle liée à une Église en particulier ?</strong><br/>Non. Les questions portent sur ce que dit le texte biblique, sans prendre parti entre les Églises. Chaque réponse renvoie au verset qui la justifie.</p>

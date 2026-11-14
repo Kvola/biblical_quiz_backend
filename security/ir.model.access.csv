@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bq_api_session_manager,bq.api_session manager,model_bq_api_session,group_bq_manager,1,1,1,1
+access_bq_player_manager,bq.player manager,model_bq_player,group_bq_manager,1,1,1,1
+access_bq_report_manager,bq.report manager,model_bq_report,group_bq_manager,1,1,1,1
+access_bq_team_manager,bq.team manager,model_bq_team,group_bq_manager,1,1,1,1
+access_bq_team_member_manager,bq.team_member manager,model_bq_team_member,group_bq_manager,1,1,1,1
+access_bq_match_manager,bq.match manager,model_bq_match,group_bq_manager,1,1,1,1
+access_bq_match_participant_manager,bq.match_participant manager,model_bq_match_participant,group_bq_manager,1,1,1,1
+access_bq_match_question_manager,bq.match_question manager,model_bq_match_question,group_bq_manager,1,1,1,1
+access_bq_match_answer_manager,bq.match_answer manager,model_bq_match_answer,group_bq_manager,1,1,1,1
+access_bq_tournament_manager,bq.tournament manager,model_bq_tournament,group_bq_manager,1,1,1,1
+access_bq_tournament_entry_manager,bq.tournament_entry manager,model_bq_tournament_entry,group_bq_manager,1,1,1,1
+access_bq_tournament_duel_manager,bq.tournament_duel manager,model_bq_tournament_duel,group_bq_manager,1,1,1,1

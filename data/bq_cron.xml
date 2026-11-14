@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Les téléphones font avancer les matchs (tick à chaque échéance) ;
+             cette tâche rattrape ceux que plus personne ne fait avancer. -->
+        <record id="cron_match_advance" model="ir.cron">
+            <field name="name">Quiz Biblique : avancer les matchs abandonnés</field>
+            <field name="model_id" ref="model_bq_match"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_advance()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+        </record>
+        <record id="cron_tournament_deadlines" model="ir.cron">
+            <field name="name">Quiz Biblique : forfaits des duels de tournoi</field>
+            <field name="model_id" ref="model_bq_tournament"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_deadlines()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+        </record>
+    </data>
+</odoo>

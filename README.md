@@ -1,8 +1,32 @@
 # biblical_quiz_backend
 
-Module Odoo 19 qui déclare l'application **Quiz Biblique** (dépôt `biblical_quiz`) sur la page publique de téléchargement `/apps` du socle `mobile_app_release`, avec son guide d'utilisation.
+Module Odoo 19 de l'application **Quiz Biblique** (dépôt `biblical_quiz`) :
 
-L'application fonctionne **entièrement hors ligne et sans compte** : elle n'a pas de serveur. Ce module ne contient donc que la déclaration `mobile.app` et le guide.
+- le **jeu en ligne** (facultatif pour les utilisateurs) : comptes joueurs (numéro vérifié par WhatsApp via `otp_auth`, pseudo unique), matchs à la main de 2 à 10 joueurs ou entre deux équipes, tournois à élimination directe ;
+- la déclaration de l'application sur la page publique `/apps` (socle `mobile_app_release`) et son guide d'utilisation.
+
+Le reste de l'application fonctionne hors ligne et sans compte.
+
+## Le jeu en ligne
+
+| Élément | Où |
+|---|---|
+| Règles du match (main, chrono en pause, points, départage) | `models/bq_match.py` (docstring) |
+| Tournois (tableau, exemptions, forfaits) | `models/bq_tournament.py` |
+| Équipes (capitaine, invitations, demandes) | `models/bq_team.py` |
+| Joueurs, engagement unique, signalements | `models/bq_player.py` |
+| Réglages (limites, durées par défaut) | `models/bq_config.py` — Quiz Biblique → Configuration → Réglages |
+| API JSON-RPC `/quiz-biblique/api/v1` | `controllers/api.py` |
+| Page d'invitation `/quiz-biblique/rejoindre/<code>` | `controllers/public.py` |
+| Générateur de questions (Python pur) | `game/` — contenu copié par `biblical_quiz/scripts/sync_backend_content.py` |
+
+**Arbitrage** : le serveur tient les chronos, décide qui a pris la main (verrou de ligne du match) et ne livre la bonne réponse qu'une fois la question close. Le temps avance à chaque requête (les téléphones envoient `/match/tick` à chaque échéance) ; une tâche planifiée par minute rattrape les matchs abandonnés.
+
+**Temps réel** : l'état de chaque match et tournoi part sur un canal secret du bus Odoo (WebSocket, port gevent derrière nginx) ; sans WebSocket, l'application interroge le serveur. Une application mobile doit envoyer l'en-tête `Origin` (Odoo refuse la poignée de main sans lui).
+
+**Notifications push** : envoyées par `push_notification_hub` (identifiant `quiz_biblique`) après validation de la transaction ; l'application ne les reçoit qu'une fois Firebase configuré pour `ci.ivorycocoa.biblical_quiz`.
+
+**Installation sur un serveur où l'application a été déclarée à la main** : le `pre_init_hook` rattache la fiche `quiz-biblique` existante (et ses versions publiées) au module au lieu d'en créer une seconde.
 
 ## Ce qu'il apporte
 
