@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Quiz Biblique — jeu en ligne, page de téléchargement et guide",
-    'version': '19.0.2.0.0',
+    'version': '19.0.2.0.1',
     'category': 'Productivity',
     'summary': "Serveur du jeu en ligne de l'application Quiz Biblique (matchs à la main, "
                "équipes, tournois) ; page /apps et guide d'utilisation",
