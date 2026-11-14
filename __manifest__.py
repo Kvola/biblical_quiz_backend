@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Quiz Biblique — page de téléchargement et guide",
-    'version': '19.0.1.0.1',
+    'version': '19.0.1.0.2',
     'category': 'Productivity',
     'summary': "Déclare l'application Quiz Biblique sur la page publique /apps, "
                "avec son guide d'utilisation en ligne et en PDF",
