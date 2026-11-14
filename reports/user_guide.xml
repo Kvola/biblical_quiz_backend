@@ -421,16 +421,20 @@
             <ol>
             <li>Dans un passage ou dans l'onglet <strong>Bible</strong>, touchez le verset.
             </li>
-            <li>Une fenêtre s'ouvre en bas de l'écran, avec le texte du verset et trois boutons :
+            <li>Une fenêtre s'ouvre en bas de l'écran, avec le texte du verset et ces boutons :
             <ul>
             <li><strong>Mettre de côté</strong> : le verset est gardé dans vos <strong>Versets mis de côté</strong> ;
             </li>
             <li><strong>Copier</strong> : le verset et sa référence sont copiés, prêts à coller dans un message ;
             </li>
-            <li><strong>Partager</strong> : le verset part directement dans l'application de votre choix, par exemple WhatsApp.
+            <li><strong>Partager</strong> : le verset part directement dans l'application de votre choix, par exemple WhatsApp ;
+            </li>
+            <li><strong>Image à partager</strong> : le verset sur une belle image, à envoyer dans un groupe WhatsApp ou à publier. Choisissez <strong>Fond sombre</strong> (bleu nuit, texte crème) ou <strong>Fond clair</strong> (crème, texte bleu nuit) : votre choix est gardé pour la fois suivante. Touchez <strong>Partager l'image</strong> ;
+            </li>
+            <li><strong>Ajouter à une note</strong> : voir l'exemple 11.
             </li></ul>
             </li>
-            <li>Pour retrouver vos versets, ouvrez l'onglet <strong>Progrès</strong>, rubrique <strong>Versets mis de côté</strong>. Touchez un verset pour l'ouvrir dans son chapitre.
+            <li>Pour retrouver vos versets, ouvrez l'onglet <strong>Progrès</strong>, rubrique <strong>Versets mis de côté</strong>. Touchez un verset pour l'ouvrir dans son chapitre, ou l'icône d'image pour en faire une <strong>image à partager</strong>.
             </li></ol>
             <p>Le <strong>Verset du jour</strong>, sur l'<strong>Accueil</strong>, change chaque jour. Touchez-le pour le garder ou le partager de la même façon.</p>
             <div class="attention"><p><strong>Bon à savoir</strong> : pour retirer un verset mis de côté, touchez l'icône à droite du verset dans l'onglet <strong>Progrès</strong>. Un message propose <strong>Annuler</strong> pendant quelques secondes, en cas d'erreur.</p></div>
@@ -487,6 +491,10 @@
             <td>Affiche sous chaque verset l'autre traduction (KJV ou Segond).</td>
             </tr>
             <tr>
+            <td><strong>Garder l'écran allumé</strong></td>
+            <td>Rubrique <strong>Notes de prédication</strong> : tant qu'une note est ouverte, le téléphone ne se verrouille pas. Désactivez-le pour économiser la batterie.</td>
+            </tr>
+            <tr>
             <td><strong>À propos</strong></td>
             <td>Les textes utilisés et le numéro de version de l'application.</td>
             </tr>
@@ -507,7 +515,7 @@
             </li>
             <li>Dans <strong>Notes</strong>, écrivez ce que vous retenez, à votre rythme.
             </li></ol>
-            <p>Tout est <strong>enregistré automatiquement</strong> : il n'y a pas de bouton à toucher, et rien n'est perdu si vous quittez l'écran. Tant que la note est ouverte, <strong>l'écran reste allumé</strong> : le téléphone ne se verrouille pas pendant la prédication.</p>
+            <p>Tout est <strong>enregistré automatiquement</strong> : il n'y a pas de bouton à toucher, et rien n'est perdu si vous quittez l'écran. Tant que la note est ouverte, <strong>l'écran reste allumé</strong> : le téléphone ne se verrouille pas pendant la prédication. Pour économiser la batterie, désactivez <strong>Garder l'écran allumé</strong> en bas de la note, ou dans <strong>Réglages → Notes de prédication</strong>.</p>
             <div class="attention"><p><strong>Bon à savoir</strong> : pour aller plus vite, dictez vos notes. Touchez le champ <strong>Notes</strong>, puis le <strong>micro</strong> du clavier, et parlez : le texte s'écrit tout seul. Relisez-le ensuite, la dictée se trompe parfois sur les noms propres.</p></div>
             <p><strong>Associer les passages</strong></p>
             <ul>
@@ -530,6 +538,8 @@
             <ul>
             <li><strong>WhatsApp</strong> : la note s'ouvre dans WhatsApp, mise en forme (titre et passages en gras), prête à envoyer à un contact ou à un groupe ;
             </li>
+            <li><strong>Image à partager</strong> : un passage de la note sur une image, avec le titre de la prédication (choisissez le passage s'il y en a plusieurs) ;
+            </li>
             <li><strong>Autre application (e-mail, SMS…)</strong> : la note en texte simple ;
             </li>
             <li><strong>Copier le texte</strong> : pour la coller où vous voulez.
@@ -541,7 +551,7 @@
             </li>
             <li>Le menu <strong>⋮</strong> de l'onglet <strong>Notes</strong> propose <strong>Sauvegarder mes notes</strong> (un fichier à garder dans Drive, à vous envoyer par e-mail…) et <strong>Restaurer une sauvegarde</strong>. Restaurer n'efface rien : une note déjà présente n'est remplacée que si la sauvegarde en a une version plus récente.
             </li></ul>
-            <div class="attention"><p><strong>Bon à savoir</strong> : vos notes restent sur votre téléphone. Sauvegardez-les de temps en temps : c'est ce qui permet de les retrouver sur un nouveau téléphone. <strong>Effacer ma progression</strong> ne touche pas à vos notes.</p></div>
+            <div class="attention"><p><strong>Bon à savoir</strong> : vos notes restent sur votre téléphone. Sauvegardez-les de temps en temps : c'est ce qui permet de les retrouver sur un nouveau téléphone. Pour ne pas l'oublier, l'onglet <strong>Notes</strong> vous le rappelle par un encadré : une semaine après votre première note, puis un mois après chaque sauvegarde. <strong>Plus tard</strong> le fait taire pour un mois. <strong>Effacer ma progression</strong> ne touche pas à vos notes.</p></div>
             <hr/>
             <h2 id="utiliser-lapplication-dans-le-navigateur">Utiliser l'application dans le navigateur</h2>
             <p>Quiz Biblique existe aussi en <strong>version web</strong> : elle s'ouvre dans le navigateur, sans rien installer. C'est la solution pour un <strong>iPhone</strong>, un <strong>iPad</strong> ou un <strong>ordinateur</strong>, où l'application Android ne s'installe pas.</p>
