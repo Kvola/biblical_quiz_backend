@@ -21,7 +21,7 @@ class QuizPublic(Controller):
            type='http', auth='public', methods=['GET'], sitemap=False)
     def join_page(self, code, **kw):
         code = re.sub(r'[^A-Z0-9]', '', (code or '').upper())[:6]
-        en = 'join' in request.httprequest.path
+        en = '/join/' in request.httprequest.path  # « rejoindre » contient aussi « join »
         base = request.httprequest.host_url.rstrip('/')
         install = '%s/apps/%s' % (base, SLUG)
         web = '%s/apps/%s/web/?join=%s' % (base, SLUG, code)

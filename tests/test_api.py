@@ -77,3 +77,6 @@ class TestApi(HttpCase):
         self.assertIn('AB12CD', page.text)
         self.assertIn('scheme=quizbiblique', page.text)
         self.assertIn('/apps/quiz-biblique/web/?join=AB12CD', page.text)
+        # Le lien français donne la page en français (« rejoindre » contient « join »).
+        self.assertIn('Rejoindre une partie de Quiz Biblique', page.text)
+        self.assertIn('Join a Bible Quiz game', self.url_open('/quiz-biblique/join/ab12cd').text)
