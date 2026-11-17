@@ -647,7 +647,7 @@
             <li>Un joueur éliminé est libéré : il peut suivre le tableau, ou rejoindre une autre partie.
             </li></ul>
             <p><strong>Le diffuser sur grand écran</strong></p>
-            <p>Sur la fiche du tournoi, touchez l'icône <strong>Diffuser sur un écran</strong> en haut, puis <strong>Sur cet appareil</strong> ou <strong>Sur une télévision ou un ordinateur</strong> (un lien à ouvrir dans son navigateur, sans compte). Le code du tournoi se saisit aussi dans <strong>Jouer avec d'autres → Écran de projection</strong>.</p>
+            <p>Sur la fiche du tournoi, touchez l'icône <strong>Diffuser sur un écran</strong> en haut, puis <strong>Sur cet appareil</strong> ou <strong>Sur une télévision ou un ordinateur</strong> (un lien à ouvrir dans son navigateur, sans compte). Ce lien ouvre directement l'écran de projection, même dans un navigateur qui n'a jamais ouvert Quiz Biblique : pas d'écran d'accueil à passer. Le code du tournoi se saisit aussi dans <strong>Jouer avec d'autres → Écran de projection</strong>.</p>
             <ul>
             <li>Pendant les inscriptions, l'écran montre le <strong>QR code</strong> et le code à scanner pour s'inscrire, et la liste des inscrits.
             </li>
