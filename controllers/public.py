@@ -17,6 +17,14 @@ PACKAGE = 'ci.ivorycocoa.biblical_quiz'
 
 class QuizPublic(Controller):
 
+    @route(['/quiz-biblique/ecran/<string:code>', '/quiz-biblique/screen/<string:code>'],
+           type='http', auth='public', methods=['GET'], sitemap=False)
+    def screen_page(self, code, **kw):
+        """Lien court à ouvrir sur une télévision ou un ordinateur : l'écran de projection
+        (match ou tournoi) de la version web, sans compte."""
+        code = re.sub(r'[^A-Z0-9]', '', (code or '').upper())[:6]
+        return request.redirect('/apps/%s/web/?watch=%s' % (SLUG, code), code=302, local=True)
+
     @route(['/quiz-biblique/rejoindre/<string:code>', '/quiz-biblique/join/<string:code>'],
            type='http', auth='public', methods=['GET'], sitemap=False)
     def join_page(self, code, **kw):

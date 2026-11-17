@@ -71,6 +71,44 @@ class TestApi(HttpCase):
         self.assertEqual(state['result']['outcome'], 'abandon')
         self.assertTrue(self.call('/player/history', ta)['matches'])
 
+    def test_projection_d_un_tournoi(self):
+        """Le code d'un tournoi se diffuse sur un écran, sans compte (avant : « Aucun match avec ce code »)."""
+        ta = self.account('+2250700000011')
+        self.call('/player/register', ta, pseudo='Organisateur', lang='fr')
+        created = self.call('/tournament/create', ta, name='Tournoi de Noël', passages=['43:3'], mode='solo')
+        self.assertTrue(created['success'], created)
+        code, tid = created['tournament']['code'], created['tournament']['id']
+        watched = self.call('/watch', code=' %s ' % code.lower())
+        self.assertTrue(watched['success'], watched)
+        self.assertEqual(watched['kind'], 'tournament')
+        self.assertEqual(watched['tournament']['id'], tid)
+        self.assertTrue(watched['channel'].startswith('bq.tournament.'))
+        self.assertIsNone(watched['my_entry_id'])
+        # Rien de privé : ni téléphone ni jeton de session dans l'état public.
+        raw = json.dumps(watched)
+        self.assertNotIn('+2250700000011', raw)
+        # Un code de match passe aussi par /watch.
+        match = self.call('/match/create', self.account_player('+2250700000012', 'Joueur'), passages=['43:3'])
+        by_match = self.call('/watch', code=match['match']['code'])
+        self.assertEqual(by_match['kind'], 'match')
+        self.assertIsNone(by_match['me'])
+        # Les applications plus anciennes (/match/watch) reçoivent un refus explicite.
+        self.assertEqual(self.call('/match/watch', code=code)['error_code'], 'TOURNAMENT_CODE')
+        self.assertEqual(self.call('/watch', code='ZZZZZZ')['error_code'], 'UNKNOWN_CODE')
+        self.assertEqual(self.call('/watch', code='')['error_code'], 'UNKNOWN_CODE')
+
+    def account_player(self, phone, pseudo):
+        token = self.account(phone)
+        self.call('/player/register', token, pseudo=pseudo, lang='fr')
+        return token
+
+    def test_lien_ecran(self):
+        r = self.url_open('/quiz-biblique/ecran/ab12cd', allow_redirects=False)
+        self.assertIn(r.status_code, (302, 303))
+        self.assertTrue(r.headers['Location'].endswith('/apps/quiz-biblique/web/?watch=AB12CD'), r.headers['Location'])
+        r = self.url_open('/quiz-biblique/screen/<script>', allow_redirects=False)
+        self.assertTrue(r.headers['Location'].endswith('/apps/quiz-biblique/web/?watch=SCRIPT'), r.headers['Location'])
+
     def test_page_d_invitation(self):
         page = self.url_open('/quiz-biblique/rejoindre/ab12cd')
         self.assertEqual(page.status_code, 200)

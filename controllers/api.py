@@ -116,6 +116,16 @@ def _tournament_payload(tournament, player=None):
             'channel': 'bq.tournament.%s' % tournament.sudo().channel_token}
 
 
+def _check_tournament_deadlines(tournament):
+    """Applique les forfaits échus (« prêt » non confirmé) sans attendre la tâche planifiée."""
+    if tournament.state != 'running':
+        return
+    now = now_ts()
+    if tournament.duel_ids.filtered(lambda d: d.state == 'ready_wait' and d.deadline and now >= d.deadline):
+        tournament._lock()
+        tournament._check_deadlines(now)
+
+
 def _tournament_for(tournament_id):
     t = request.env['bq.tournament'].sudo().browse(int(tournament_id or 0)).exists()
     if not t:
@@ -462,9 +472,40 @@ class QuizGameApi(Controller):
         def _do():
             match = request.env['bq.match'].sudo().search([('code', '=', code)], limit=1)
             if not match:
+                if request.env['bq.tournament'].sudo().search_count([('code', '=', code)], limit=1):
+                    # Application antérieure à 1.12 : elle ne sait projeter que les matchs.
+                    raise GameRefusal('TOURNAMENT_CODE', _(
+                        "Ce code est celui d'un tournoi : mettez l'application à jour pour le diffuser."))
                 raise GameRefusal('UNKNOWN_CODE', _("Aucun match avec ce code."))
             _try_advance(match)
             return ok(**_match_payload(match))
+        return guard(_do)
+
+    @route(API + '/watch', type='jsonrpc', auth='public', methods=['POST'], csrf=False)
+    def watch(self, **kw):
+        """Écran de projection, sans compte : un match ou un tournoi par son code.
+
+        Rend ``kind`` (``match`` ou ``tournament``) et l'état public ; rien de
+        secret n'y figure (pas de téléphone, réponse montrée seulement une fois
+        la question close).
+        """
+        refusal = rate_limited('watch', RL_PUBLIC)
+        if refusal:
+            return refusal
+        code = (kw.get('code') or '').strip().upper().replace(' ', '')
+
+        def _do():
+            if not code:
+                raise GameRefusal('UNKNOWN_CODE', _("Aucun match ni tournoi avec ce code."))
+            match = request.env['bq.match'].sudo().search([('code', '=', code)], limit=1)
+            if match:
+                _try_advance(match)
+                return ok(kind='match', **_match_payload(match))
+            tournament = request.env['bq.tournament'].sudo().search([('code', '=', code)], limit=1)
+            if tournament:
+                _check_tournament_deadlines(tournament)
+                return ok(kind='tournament', **_tournament_payload(tournament))
+            raise GameRefusal('UNKNOWN_CODE', _("Aucun match ni tournoi avec ce code."))
         return guard(_do)
 
     @route(API + '/match/buzz', type='jsonrpc', auth='public', methods=['POST'], csrf=False)
@@ -637,11 +678,7 @@ class QuizGameApi(Controller):
     @player_route
     def tournament_state(self, player, **kw):
         t = _tournament_for(kw.get('tournament_id'))
-        if t.state == 'running':
-            now = now_ts()
-            if t.duel_ids.filtered(lambda d: d.state == 'ready_wait' and d.deadline and now >= d.deadline):
-                t._lock()
-                t._check_deadlines(now)
+        _check_tournament_deadlines(t)
         return ok(**_tournament_payload(t, player))
 
     @route(API + '/tournament/mine', type='jsonrpc', auth='public', methods=['POST'], csrf=False)

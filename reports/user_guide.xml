@@ -607,7 +607,7 @@
             </li></ol>
             <p>Après chaque question, la bonne réponse s'affiche avec son <strong>explication</strong> et le <strong>passage</strong> à relire. À la fin, le classement s'affiche : touchez <strong>Revoir les questions</strong> pour les reprendre une à une, ou <strong>Revanche</strong> pour rejouer avec les mêmes réglages.</p>
             <div class="attention"><p><strong>Bon à savoir</strong> : un joueur ne participe qu'à <strong>une partie à la fois</strong> (un match ou un tournoi). Quitter l'écran n'abandonne pas le match : retrouvez-le avec <strong>Reprendre</strong> dans <strong>Jouer avec d'autres</strong>. Seul le bouton <strong>Quitter</strong> l'abandonne.</p></div>
-            <div class="attention"><p><strong>Bon à savoir</strong> : pour l'école du dimanche, affichez le match en grand sur un vidéoprojecteur ou une télévision : sur l'ordinateur relié, ouvrez la version web, puis <strong>Jouer avec d'autres → Écran de projection</strong> (l'icône d'écran en haut), et saisissez le code du match. Aucun compte n'est nécessaire pour cet écran.</p></div>
+            <div class="attention"><p><strong>Bon à savoir</strong> : pour l'école du dimanche, affichez le match en grand sur un vidéoprojecteur ou une télévision. Dans la salle d'attente, touchez l'icône <strong>Diffuser sur un écran</strong> en haut : <strong>Sur cet appareil</strong> (à relier par câble ou par partage d'écran), ou <strong>Sur une télévision ou un ordinateur</strong> : ouvrez le lien proposé dans son navigateur. Vous pouvez aussi, sur l'ordinateur, ouvrir la version web puis <strong>Jouer avec d'autres → Écran de projection</strong> et saisir le code. Aucun compte n'est nécessaire pour cet écran.</p></div>
             <h2 id="exemple-13--jouer-en-équipe">Exemple 13 : jouer en équipe</h2>
             <div class="exemple"><p><strong>Situation</strong> : à la soirée de l'église, les garçons affrontent les filles sur la parabole du semeur (Matthieu 13:1-23).</p></div>
             <ol>
@@ -645,6 +645,15 @@
             <li>En cas d'égalité, des <strong>questions décisives</strong> départagent les deux camps : la première bonne réponse l'emporte.
             </li>
             <li>Un joueur éliminé est libéré : il peut suivre le tableau, ou rejoindre une autre partie.
+            </li></ul>
+            <p><strong>Le diffuser sur grand écran</strong></p>
+            <p>Sur la fiche du tournoi, touchez l'icône <strong>Diffuser sur un écran</strong> en haut, puis <strong>Sur cet appareil</strong> ou <strong>Sur une télévision ou un ordinateur</strong> (un lien à ouvrir dans son navigateur, sans compte). Le code du tournoi se saisit aussi dans <strong>Jouer avec d'autres → Écran de projection</strong>.</p>
+            <ul>
+            <li>Pendant les inscriptions, l'écran montre le <strong>QR code</strong> et le code à scanner pour s'inscrire, et la liste des inscrits.
+            </li>
+            <li>Pendant le tournoi, l'écran montre le <strong>tableau</strong>. Quand un seul duel se joue, il s'affiche <strong>en grand</strong> de lui-même (questions, main, scores), puis son résultat reste quelques secondes avant le retour au tableau. Quand plusieurs duels se jouent en même temps, touchez celui à montrer ; <strong>Tableau</strong>, en haut, y revient.
+            </li>
+            <li>À la fin, l'écran annonce le vainqueur.
             </li></ul>
             <div class="attention"><p><strong>Bon à savoir</strong> : l'organisatrice peut choisir d'<strong>autres passages pour un tour</strong> (par exemple Marc 5 pour la finale), tant que ce tour n'a pas commencé.</p></div>
             <hr/>
