@@ -78,6 +78,7 @@ Une banque de questions par chapitre, pour le « Quiz sur mes lectures » de l'a
   le faire parvenir aux téléphones (révision du chapitre).
 - **Signalements** des lecteurs : une question jamais relue est retirée d'office au 3e appareil qui la
   signale (réglable).
+- **Coût mesuré** (essais réels du 24 novembre 2026, claude-opus-5-5) : Philémon, 9 questions, 0,23 $ ; Psaume 23, 4 questions, 0,10 $, 39 secondes.
 - **Dépense** : plafond quotidien du serveur (40 chapitres par défaut), plafond par réseau, journal
   *Rédactions et coût* (jetons, coût estimé, questions écartées et pourquoi). *Préparer des chapitres*
   fait rédiger d'avance un livre, hors quota des lecteurs.
