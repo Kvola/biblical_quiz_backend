@@ -15,7 +15,7 @@ from odoo.addons.otp_auth.tools.client_ip import client_ip
 from ..models.bq_ai import AiRefusal
 from .common import API, fail, ok, rate_limited
 
-RL_BANK = (120, 60, 60)        # lectures de la banque par IP
+RL_BANK = (300, 60, 60)        # lectures de la banque par IP (une salle entière sur le même Wi-Fi)
 RL_REQUEST = (30, 600, 600)    # demandes de chapitres par IP, avant même le quota
 RL_REPORT = (30, 600, 600)     # signalements par IP
 
