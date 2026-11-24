@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ============================== Questions à relire -->
+    <record id="bq_ai_question_view_list" model="ir.ui.view">
+        <field name="name">bq.ai.question.list</field>
+        <field name="model">bq.ai.question</field>
+        <field name="arch" type="xml">
+            <list create="0" decoration-muted="state == 'withdrawn'" decoration-success="state == 'validated'"
+                  decoration-danger="report_count &gt; 0 and state == 'auto'">
+                <field name="ref_label"/>
+                <field name="q_fr"/>
+                <field name="answer_fr"/>
+                <field name="skill" optional="hide"/>
+                <field name="report_count"/>
+                <field name="state" widget="badge" decoration-success="state == 'validated'"
+                       decoration-warning="state == 'auto'" decoration-muted="state == 'withdrawn'"/>
+                <button name="action_validate" type="object" string="Valider" icon="fa-check"
+                        invisible="state == 'validated'"/>
+                <button name="action_withdraw" type="object" string="Retirer" icon="fa-ban"
+                        invisible="state == 'withdrawn'"/>
+            </list>
+        </field>
+    </record>
+    <record id="bq_ai_question_view_form" model="ir.ui.view">
+        <field name="name">bq.ai.question.form</field>
+        <field name="model">bq.ai.question</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+                    <button name="action_validate" type="object" string="Valider (relue)" class="btn-primary"
+                            invisible="state == 'validated'"/>
+                    <button name="action_withdraw" type="object" string="Retirer" invisible="state == 'withdrawn'"/>
+                    <button name="action_restore" type="object" string="Remettre « non relue »"
+                            invisible="state == 'auto'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><h2><field name="ref_label"/></h2></div>
+                    <div class="alert alert-warning" role="alert" invisible="not withdrawn_reason">
+                        <field name="withdrawn_reason"/>
+                    </div>
+                    <group string="Le texte">
+                        <field name="verse_fr"/>
+                        <field name="verse_en"/>
+                    </group>
+                    <group>
+                        <group string="Français">
+                            <field name="q_fr"/>
+                            <field name="choices_fr"/>
+                            <field name="answer_fr"/>
+                            <field name="explain_fr"/>
+                            <field name="quote_fr"/>
+                        </group>
+                        <group string="English">
+                            <field name="q_en"/>
+                            <field name="choices_en"/>
+                            <field name="answer_en"/>
+                            <field name="explain_en"/>
+                            <field name="quote_en"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="chapter_id" readonly="1"/>
+                            <field name="verse"/>
+                        </group>
+                        <group>
+                            <field name="answer"/>
+                            <field name="skill"/>
+                        </group>
+                    </group>
+                    <group string="Signalements des lecteurs" invisible="report_count == 0">
+                        <field name="report_ids" nolabel="1" colspan="2" readonly="1">
+                            <list><field name="create_date"/><field name="reason"/><field name="note"/><field name="device_id"/></list>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="bq_ai_question_view_search" model="ir.ui.view">
+        <field name="name">bq.ai.question.search</field>
+        <field name="model">bq.ai.question</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="q_fr" string="Question" filter_domain="['|', ('q_fr', 'ilike', self), ('q_en', 'ilike', self)]"/>
+                <field name="chapter_id"/>
+                <filter name="todo" string="À relire" domain="[('state', '=', 'auto')]"/>
+                <filter name="reported" string="Signalées" domain="[('report_count', '&gt;', 0)]"/>
+                <filter name="validated" string="Relues" domain="[('state', '=', 'validated')]"/>
+                <filter name="withdrawn" string="Retirées" domain="[('state', '=', 'withdrawn')]"/>
+                <group>
+                    <filter name="by_chapter" string="Chapitre" context="{'group_by': 'chapter_id'}"/>
+                    <filter name="by_state" string="État" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_bq_ai_question" model="ir.actions.act_window">
+        <field name="name">Questions rédigées par IA</field>
+        <field name="res_model">bq.ai.question</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_todo': 1}</field>
+    </record>
+
+    <!-- ============================== Chapitres -->
+    <record id="bq_ai_chapter_view_list" model="ir.ui.view">
+        <field name="name">bq.ai.chapter.list</field>
+        <field name="model">bq.ai.chapter</field>
+        <field name="arch" type="xml">
+            <list create="0" decoration-muted="state in ('empty', 'failed')" decoration-info="state in ('queued', 'pending')">
+                <field name="display_name" string="Chapitre"/>
+                <field name="state" widget="badge" decoration-success="state == 'ready'"
+                       decoration-info="state in ('queued', 'pending')" decoration-danger="state == 'failed'"/>
+                <field name="served_count"/>
+                <field name="unreviewed_count"/>
+                <field name="generated_at"/>
+                <field name="last_error" optional="show"/>
+            </list>
+        </field>
+    </record>
+    <record id="bq_ai_chapter_view_form" model="ir.ui.view">
+        <field name="name">bq.ai.chapter.form</field>
+        <field name="model">bq.ai.chapter</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+                    <button name="action_queue" type="object" string="Rédiger de nouveau"
+                            invisible="state in ('queued', 'pending')"
+                            confirm="Les questions déjà relues sont conservées ; les questions non relues sont remplacées. Continuer ?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="queued,pending,ready"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><h1><field name="display_name"/></h1></div>
+                    <group>
+                        <group>
+                            <field name="served_count"/>
+                            <field name="unreviewed_count"/>
+                            <field name="rev"/>
+                        </group>
+                        <group>
+                            <field name="generated_at"/>
+                            <field name="attempts"/>
+                            <field name="last_error"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Questions">
+                            <field name="question_ids">
+                                <list create="0" decoration-muted="state == 'withdrawn'">
+                                    <field name="verse"/>
+                                    <field name="q_fr"/>
+                                    <field name="answer_fr"/>
+                                    <field name="report_count"/>
+                                    <field name="state" widget="badge"/>
+                                    <button name="action_validate" type="object" string="Valider" icon="fa-check"
+                                            invisible="state == 'validated'"/>
+                                    <button name="action_withdraw" type="object" string="Retirer" icon="fa-ban"
+                                            invisible="state == 'withdrawn'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Rédactions et coût">
+                            <field name="generation_ids" readonly="1">
+                                <list>
+                                    <field name="create_date"/>
+                                    <field name="state"/>
+                                    <field name="model"/>
+                                    <field name="kept"/>
+                                    <field name="dropped"/>
+                                    <field name="cost" sum="Total"/>
+                                    <field name="error"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="bq_ai_chapter_view_search" model="ir.ui.view">
+        <field name="name">bq.ai.chapter.search</field>
+        <field name="model">bq.ai.chapter</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="code"/>
+                <filter name="ready" string="Prêts" domain="[('state', '=', 'ready')]"/>
+                <filter name="todo" string="Avec des questions à relire" domain="[('unreviewed_count', '&gt;', 0)]"/>
+                <filter name="running" string="En file ou en cours" domain="[('state', 'in', ('queued', 'pending'))]"/>
+                <filter name="trouble" string="Sans question ou en échec" domain="[('state', 'in', ('empty', 'failed'))]"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_bq_ai_chapter" model="ir.actions.act_window">
+        <field name="name">Chapitres</field>
+        <field name="res_model">bq.ai.chapter</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ============================== Préparer des chapitres -->
+    <record id="bq_ai_prepare_view_form" model="ir.ui.view">
+        <field name="name">bq.ai.prepare.form</field>
+        <field name="model">bq.ai.prepare</field>
+        <field name="arch" type="xml">
+            <form>
+                <p>Fait rédiger d'avance les chapitres d'un livre, sans toucher au quota des lecteurs.
+                   Chaque chapitre coûte deux appels à Claude (rédaction puis relecture indépendante).</p>
+                <group>
+                    <field name="book"/>
+                    <label for="chapter_from" string="Chapitres"/>
+                    <div><field name="chapter_from" class="oe_inline"/> à <field name="chapter_to" class="oe_inline"/></div>
+                    <field name="redo"/>
+                </group>
+                <footer>
+                    <button name="action_prepare" type="object" string="Mettre en file" class="btn-primary"/>
+                    <button special="cancel" string="Annuler"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_bq_ai_prepare" model="ir.actions.act_window">
+        <field name="name">Préparer des chapitres</field>
+        <field name="res_model">bq.ai.prepare</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- ============================== Journal : rédactions, demandes, signalements, appareils -->
+    <record id="bq_ai_generation_view_list" model="ir.ui.view">
+        <field name="name">bq.ai.generation.list</field>
+        <field name="model">bq.ai.generation</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" decoration-danger="state == 'failed'" decoration-muted="state == 'empty'">
+                <field name="create_date"/>
+                <field name="chapter_id"/>
+                <field name="state"/>
+                <field name="model"/>
+                <field name="kept" sum="Gardées"/>
+                <field name="dropped" sum="Écartées"/>
+                <field name="input_tokens" optional="hide"/>
+                <field name="output_tokens" optional="hide"/>
+                <field name="cost" sum="Total ($)"/>
+                <field name="duration_ms" optional="hide"/>
+                <field name="error"/>
+            </list>
+        </field>
+    </record>
+    <record id="bq_ai_generation_view_form" model="ir.ui.view">
+        <field name="name">bq.ai.generation.form</field>
+        <field name="model">bq.ai.generation</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="chapter_id"/>
+                            <field name="state"/>
+                            <field name="model"/>
+                            <field name="error"/>
+                        </group>
+                        <group>
+                            <field name="kept"/>
+                            <field name="dropped"/>
+                            <field name="input_tokens"/>
+                            <field name="output_tokens"/>
+                            <field name="cost"/>
+                            <field name="duration_ms"/>
+                        </group>
+                    </group>
+                    <group string="Questions écartées par les contrôles, et pourquoi">
+                        <field name="dropped_detail" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="bq_ai_generation_view_pivot" model="ir.ui.view">
+        <field name="name">bq.ai.generation.pivot</field>
+        <field name="model">bq.ai.generation</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="create_date" interval="month" type="row"/>
+                <field name="state" type="col"/>
+                <field name="cost" type="measure"/>
+                <field name="kept" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="action_bq_ai_generation" model="ir.actions.act_window">
+        <field name="name">Rédactions et coût</field>
+        <field name="res_model">bq.ai.generation</field>
+        <field name="view_mode">list,pivot,form</field>
+    </record>
+
+    <record id="bq_ai_request_view_list" model="ir.ui.view">
+        <field name="name">bq.ai.request.list</field>
+        <field name="model">bq.ai.request</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" decoration-muted="state == 'refused'" decoration-danger="state == 'failed'">
+                <field name="create_date"/>
+                <field name="device_id"/>
+                <field name="book"/>
+                <field name="chapter"/>
+                <field name="chapter_id"/>
+                <field name="state"/>
+                <field name="error"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_bq_ai_request" model="ir.actions.act_window">
+        <field name="name">Demandes des lecteurs</field>
+        <field name="res_model">bq.ai.request</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <record id="bq_ai_report_view_list" model="ir.ui.view">
+        <field name="name">bq.ai.report.list</field>
+        <field name="model">bq.ai.report</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0">
+                <field name="create_date"/>
+                <field name="question_id"/>
+                <field name="chapter_id"/>
+                <field name="reason"/>
+                <field name="note"/>
+                <field name="question_state"/>
+                <field name="device_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_bq_ai_report" model="ir.actions.act_window">
+        <field name="name">Signalements de questions</field>
+        <field name="res_model">bq.ai.report</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <record id="bq_ai_device_view_list" model="ir.ui.view">
+        <field name="name">bq.ai.device.list</field>
+        <field name="model">bq.ai.device</field>
+        <field name="arch" type="xml">
+            <list create="0" editable="bottom">
+                <field name="display_name" string="Appareil"/>
+                <field name="last_seen"/>
+                <field name="blocked"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_bq_ai_device" model="ir.actions.act_window">
+        <field name="name">Appareils</field>
+        <field name="res_model">bq.ai.device</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <!-- ============================== Réglages -->
+    <record id="res_config_settings_view_form_ai" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.quiz_biblique.ai</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="biblical_quiz_backend.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='bq_accounts']" position="after">
+                <block title="Questions rédigées par IA" name="bq_ai">
+                    <setting string="Clé Anthropic" help="Sans clé, l'application ne propose pas les questions rédigées par IA.">
+                        <field name="bq_anthropic_api_key" password="True"/>
+                    </setting>
+                    <setting string="Modèle" help="Vide : claude-opus-5-5.">
+                        <field name="bq_ai_model" placeholder="claude-opus-5-5"/>
+                    </setting>
+                    <setting string="Quota gratuit" help="Chapitres nouveaux qu'un appareil peut demander par jour. Lire un chapitre déjà rédigé ne compte pas.">
+                        <field name="bq_ai_daily_quota"/>
+                    </setting>
+                    <setting string="Plafond du serveur" help="Chapitres nouveaux par jour, tous lecteurs confondus : borne la dépense quotidienne.">
+                        <field name="bq_ai_daily_global_cap"/>
+                    </setting>
+                    <setting string="Plafond par réseau" help="Chapitres nouveaux par jour depuis une même adresse.">
+                        <field name="bq_ai_ip_daily_cap"/>
+                    </setting>
+                    <setting string="Retrait d'office" help="Nombre d'appareils qui signalent une question jamais relue avant qu'elle ne soit retirée.">
+                        <field name="bq_ai_report_threshold"/>
+                    </setting>
+                    <setting string="Suspendre la rédaction" help="Plus aucun chapitre n'est rédigé ; les chapitres déjà prêts restent servis.">
+                        <field name="bq_ai_suspended"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ============================== Menus -->
+    <menuitem id="menu_bq_ai" name="Questions IA" parent="menu_bq_root" sequence="50"/>
+    <menuitem id="menu_bq_ai_questions" name="À relire" parent="menu_bq_ai" action="action_bq_ai_question" sequence="10"/>
+    <menuitem id="menu_bq_ai_chapters" name="Chapitres" parent="menu_bq_ai" action="action_bq_ai_chapter" sequence="20"/>
+    <menuitem id="menu_bq_ai_prepare" name="Préparer des chapitres" parent="menu_bq_ai" action="action_bq_ai_prepare" sequence="30"/>
+    <menuitem id="menu_bq_ai_reports" name="Signalements" parent="menu_bq_ai" action="action_bq_ai_report" sequence="40"/>
+    <menuitem id="menu_bq_ai_generations" name="Rédactions et coût" parent="menu_bq_ai" action="action_bq_ai_generation" sequence="50"/>
+    <menuitem id="menu_bq_ai_requests" name="Demandes des lecteurs" parent="menu_bq_ai" action="action_bq_ai_request" sequence="60"/>
+    <menuitem id="menu_bq_ai_devices" name="Appareils" parent="menu_bq_ai" action="action_bq_ai_device" sequence="70"/>
+</odoo>

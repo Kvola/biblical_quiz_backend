@@ -337,6 +337,19 @@
             <li>Touchez <strong>Commencer</strong> en bas de l'écran.
             </li></ol>
             <p>Pendant le quiz, une étiquette indique d'où vient chaque question, par exemple <em>Marc 1</em>. Certaines questions portent la mention <strong>Tiré du texte</strong> : elles sont construites à partir du texte biblique lui-même, par exemple compléter un verset ou retrouver l'ordre de deux passages. Le texte des versets n'est jamais modifié.</p>
+            <h3 id="de-vraies-questions-de-compréhension-rédigées-par-ia">De vraies questions de compréhension, rédigées par IA</h3>
+            <p>Pour les chapitres qui n'ont pas de questions relues, le quiz complète avec des questions <strong>Tiré du texte</strong>. Vous pouvez demander mieux : de vraies questions de compréhension, rédigées par une intelligence artificielle à partir du chapitre.</p>
+            <ol>
+            <li>Dans l'écran <strong>Quiz sur mes lectures</strong>, repérez la carte <strong>Questions de compréhension</strong> et touchez <strong>Activer</strong>. Il faut une connexion Internet. L'application envoie alors au serveur la liste des chapitres choisis et un identifiant anonyme de votre installation, rien d'autre.
+            </li>
+            <li>La carte indique combien de chapitres choisis ont déjà leurs questions. Ces questions sont téléchargées et restent disponibles <strong>hors ligne</strong>.
+            </li>
+            <li>Pour les chapitres qui n'en ont pas encore, touchez <strong>Demander 1 chapitre</strong> (ou plusieurs). La rédaction prend une à deux minutes par chapitre ; vous pouvez commencer le quiz sans attendre, les nouvelles questions serviront la fois suivante.
+            </li></ol>
+            <p>Vous pouvez demander quelques chapitres nouveaux par jour (trois, sauf réglage différent du serveur) ; la carte vous dit combien il vous en reste. Lire les questions d'un chapitre déjà rédigé ne compte pas.</p>
+            <p>Chaque question rédigée par IA est vérifiée automatiquement : ses citations doivent se retrouver mot pour mot dans la Bible, en français et en anglais, et une seconde relecture automatique écarte les questions fausses, ambiguës ou qui prennent parti sur une doctrine. Tant que personne ne l'a relue, elle porte l'étiquette <strong>Rédigé par IA · non relu</strong> : le verset fait foi. Une fois relue, l'étiquette devient <strong>Rédigé par IA · relu</strong>.</p>
+            <p>Une question vous paraît fausse, peu claire ou orientée ? Après avoir répondu, touchez <strong>Signaler cette question</strong>, choisissez le motif et envoyez. Une question signalée par plusieurs lecteurs est retirée.</p>
+            <p>Certains chapitres (listes de noms, généalogies) ne se prêtent pas à ces questions : le quiz garde alors les questions tirées du texte. Pour tout arrêter, ouvrez <strong>Réglages</strong> et désactivez <strong>Questions rédigées par IA</strong>.</p>
             <div class="attention"><p><strong>Astuce</strong> : dans la liste <strong>Livres du quiz</strong>, le menu à droite d'un livre permet de <strong>Marquer tout le livre comme lu</strong>, ou de <strong>Retirer « lu » pour ce livre</strong>.</p></div>
             <hr/>
             <h2 id="exemple-5--découvrir-un-livre-de-la-bible">Exemple 5 : découvrir un livre de la Bible</h2>

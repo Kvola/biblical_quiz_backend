@@ -5,3 +5,4 @@ from . import bq_team
 from . import bq_match
 from . import bq_tournament
 from . import bq_notify
+from . import bq_ai

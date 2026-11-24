@@ -22,6 +22,11 @@ PARAMS = {
     'forfeit_minutes_default': (10, 1, 1440),
     'lobby_idle_minutes': (30, 5, 1440),    # salle d'attente abandonnée → annulée
     'running_idle_minutes': (10, 2, 1440),  # match sans aucune activité → clos
+    # Questions rédigées par IA (models/bq_ai.py)
+    'ai_daily_quota': (3, 0, 100),          # chapitres nouveaux par appareil et par jour
+    'ai_daily_global_cap': (40, 0, 5000),   # chapitres demandés par les lecteurs, par jour, tout le serveur
+    'ai_ip_daily_cap': (20, 1, 5000),       # par réseau et par jour
+    'ai_report_threshold': (3, 1, 100),     # signalements qui retirent une question jamais relue
 }
 
 PREFIX = 'biblical_quiz.'
@@ -74,6 +79,27 @@ class ResConfigSettings(models.TransientModel):
     bq_phone_countries = fields.Char(
         "Pays proposés à la connexion", config_parameter=PREFIX + 'phone_countries', default='CI',
         help="Codes ISO séparés par des virgules (ex. CI,SN,BF,FR).")
+
+    # --- Questions rédigées par IA
+    bq_anthropic_api_key = fields.Char(
+        "Clé Anthropic", config_parameter=PREFIX + 'anthropic_api_key',
+        help="Clé de l'API Claude. Vide : les questions rédigées par IA ne sont pas proposées.")
+    bq_ai_model = fields.Char(
+        "Modèle", config_parameter=PREFIX + 'ai_model',
+        help="Vide : claude-opus-5-5. Un modèle moins cher (claude-haiku-5-5) rédige des questions moins sûres.")
+    bq_ai_suspended = fields.Boolean(
+        "Suspendre la rédaction", config_parameter=PREFIX + 'ai_suspended',
+        help="Plus aucun chapitre n'est rédigé ; les chapitres déjà prêts restent servis.")
+    bq_ai_daily_quota = fields.Integer(
+        "Chapitres nouveaux par appareil et par jour", config_parameter=PREFIX + 'ai_daily_quota', default=3)
+    bq_ai_daily_global_cap = fields.Integer(
+        "Chapitres nouveaux par jour, tous lecteurs confondus", config_parameter=PREFIX + 'ai_daily_global_cap',
+        default=40, help="Borne la dépense quotidienne. Les chapitres préparés depuis le back-office n'y comptent pas.")
+    bq_ai_ip_daily_cap = fields.Integer(
+        "Chapitres nouveaux par réseau et par jour", config_parameter=PREFIX + 'ai_ip_daily_cap', default=20)
+    bq_ai_report_threshold = fields.Integer(
+        "Signalements avant retrait d'office", config_parameter=PREFIX + 'ai_report_threshold', default=3,
+        help="Une question jamais relue est retirée quand ce nombre d'appareils différents l'a signalée.")
 
     @api.model
     def _bq_limits(self):

@@ -59,3 +59,27 @@ Comme les autres modules : `./pull_addons.sh --clone biblical_quiz_backend` puis
 ## Licence
 
 LGPL-3
+
+## Questions de compréhension rédigées par IA (19.0.3.0.0)
+
+Une banque de questions par chapitre, pour le « Quiz sur mes lectures » de l'application.
+
+- **Mise en service** : Quiz Biblique → Configuration → Réglages → *Questions rédigées par IA* →
+  renseigner la **clé Anthropic** (paramètre `biblical_quiz.anthropic_api_key`). Sans clé, l'application
+  indique que le service n'est pas disponible. Essai réel sans rien enregistrer :
+  `odoo shell … < scripts/test_ia.py`.
+- **Fonctionnement** : un lecteur demande un chapitre (`/ai/request`, quota gratuit par appareil et par
+  jour) → le chapitre est mis en file → la tâche planifiée *rédiger les chapitres en file* appelle Claude
+  deux fois (rédaction, puis relecture indépendante à l'aveugle), applique les contrôles de
+  `game/ai_bank.py`, enregistre les questions → l'application les lit (`/ai/bank`) et les garde hors ligne.
+  Un chapitre n'est rédigé qu'une fois pour tous les lecteurs.
+- **Relecture** : Questions IA → *À relire*. *Valider* enlève la mention « non relu » dans l'application
+  et rend la question utilisable dans les matchs ; *Retirer* cesse de la servir. Corriger un texte suffit à
+  le faire parvenir aux téléphones (révision du chapitre).
+- **Signalements** des lecteurs : une question jamais relue est retirée d'office au 3e appareil qui la
+  signale (réglable).
+- **Dépense** : plafond quotidien du serveur (40 chapitres par défaut), plafond par réseau, journal
+  *Rédactions et coût* (jetons, coût estimé, questions écartées et pourquoi). *Préparer des chapitres*
+  fait rédiger d'avance un livre, hors quota des lecteurs.
+- Dépendance Python : `anthropic` (déjà requise par les modules Comprendre, Génie en herbe, Carnet Auto).
+

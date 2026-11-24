@@ -11,3 +11,10 @@ access_bq_match_answer_manager,bq.match_answer manager,model_bq_match_answer,gro
 access_bq_tournament_manager,bq.tournament manager,model_bq_tournament,group_bq_manager,1,1,1,1
 access_bq_tournament_entry_manager,bq.tournament_entry manager,model_bq_tournament_entry,group_bq_manager,1,1,1,1
 access_bq_tournament_duel_manager,bq.tournament_duel manager,model_bq_tournament_duel,group_bq_manager,1,1,1,1
+access_bq_ai_device_manager,bq.ai.device manager,model_bq_ai_device,group_bq_manager,1,1,1,1
+access_bq_ai_chapter_manager,bq.ai.chapter manager,model_bq_ai_chapter,group_bq_manager,1,1,1,1
+access_bq_ai_question_manager,bq.ai.question manager,model_bq_ai_question,group_bq_manager,1,1,1,1
+access_bq_ai_report_manager,bq.ai.report manager,model_bq_ai_report,group_bq_manager,1,1,1,1
+access_bq_ai_request_manager,bq.ai.request manager,model_bq_ai_request,group_bq_manager,1,1,1,1
+access_bq_ai_generation_manager,bq.ai.generation manager,model_bq_ai_generation,group_bq_manager,1,1,1,1
+access_bq_ai_prepare_manager,bq.ai.prepare manager,model_bq_ai_prepare,group_bq_manager,1,1,1,1

@@ -794,9 +794,12 @@ class BqMatch(models.Model):
             exclude = frozenset(self.env['bq.match.question'].sudo().search(
                 [('match_id.tournament_id', '=', self.tournament_id.id)]).mapped('qid'))
         rnd = random.Random(secrets.randbits(64))
-        items = qgen.build_questions(codes, self.lang, self.question_count + extra, rnd, exclude_ids=exclude)
+        # Questions rédigées par IA : seulement celles qui ont été relues (un match se joue sans filet).
+        bank = self.env['bq.ai.chapter'].sudo()._match_bank([qgen.parse_passage(c) for c in codes])
+        items = qgen.build_questions(codes, self.lang, self.question_count + extra, rnd, exclude_ids=exclude,
+                                     bank=bank)
         if len(items) < self.question_count and exclude:
-            items = qgen.build_questions(codes, self.lang, self.question_count + extra, rnd)
+            items = qgen.build_questions(codes, self.lang, self.question_count + extra, rnd, bank=bank)
         if len(items) < self.question_count:
             raise GameRefusal('QUESTIONS', _("Pas assez de questions pour ces passages."))
         self.question_ids.sudo().unlink()
@@ -914,7 +917,8 @@ class BqMatchQuestion(models.Model):
     explain = fields.Text("Explication")
     ref = fields.Char("Référence")
     ref_label = fields.Char("Passage")
-    source = fields.Selection([('reviewed', "Relue"), ('generated', "Tirée du texte")], "Origine")
+    source = fields.Selection([('reviewed', "Relue"), ('ai', "Rédigée par IA, relue"),
+                               ('generated', "Tirée du texte")], "Origine")
     is_tiebreak = fields.Boolean("Question décisive")
     state = fields.Selection([('pending', "À venir"), ('asked', "Posée"), ('done', "Close")], default='pending',
                              required=True)

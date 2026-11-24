@@ -210,5 +210,106 @@ class QuestionsTest(Checks, unittest.TestCase):
         self.assertLess(time.perf_counter() - t, 3.0)
 
 
+class AiBankChecks:
+    """Contrôles automatiques des questions rédigées par IA (game/ai_bank.py)."""
+
+    def _kept(self, *questions):
+        from . import ai_bank, ai_fixtures as F
+        return ai_bank.validate(43, 3, F.generation(*questions))
+
+    def test_ai_valid_questions_kept_and_ordered_by_verse_found(self):
+        from . import ai_fixtures as F
+        kept, dropped = self._kept(F.good(16), F.good(3), F.good(19))
+        self.assertEqual((len(kept), dropped), (3, []))
+        self.assertEqual([q['verse'] for q in kept], [16, 3, 19])
+        self.assertEqual(kept[0]['choices']['fr'][kept[0]['answer']][:8], 'Pour que')
+
+    def test_ai_wrong_verse_number_is_corrected_from_the_quote(self):
+        from . import ai_fixtures as F
+        kept, _ = self._kept(dict(F.good(16), verse=2))
+        self.assertEqual(kept[0]['verse'], 16)
+
+    def test_ai_rejections(self):
+        from . import ai_fixtures as F
+        g = F.good(16)
+        bad = {
+            'citation paraphrasée': dict(g, quote_fr="afin que celui qui croit ne meure pas"),
+            'citation anglaise absente': dict(g, quote_en="so that believers shall live"),
+            'guillemets inexacts': dict(g, explain_fr="Le verset dit : « Dieu aime tous les hommes »."),
+            'trois propositions': dict(g, choices_fr=g['choices_fr'][:3]),
+            'propositions identiques': dict(g, choices_en=[g['choices_en'][0]] * 2 + g['choices_en'][2:]),
+            'fourre-tout': dict(g, choices_fr=g['choices_fr'][:3] + ["Toutes les réponses"]),
+            'all of the above': dict(g, choices_en=g['choices_en'][:3] + ["All of the above"]),
+            'réponse hors bornes': dict(g, answer=4),
+            'devinable': dict(g, choices_fr=[g['choices_fr'][0] + " et qu'il ne périsse point, lui et sa maison",
+                                             "Le juger", "La loi", "Rien"]),
+            'verset inexistant et citation ailleurs': dict(g, verse=99, quote_fr="Au commencement, Dieu créa"),
+            'champ manquant': {k: v for k, v in g.items() if k != 'explain_en'},
+            'pas un objet': 'x',
+        }
+        for name, q in bad.items():
+            kept, dropped = self._kept(q)
+            self.assertEqual((len(kept), len(dropped)), (0, 1), name)
+        # Une réponse d'IA qui n'est pas de la forme attendue ne casse rien.
+        from . import ai_bank
+        for junk in (None, [], {'questions': 'x'}, {'questions': None}):
+            self.assertEqual(ai_bank.validate(43, 3, junk), ([], []))
+
+    def test_ai_duplicate_dropped(self):
+        from . import ai_fixtures as F
+        kept, dropped = self._kept(F.good(16), F.good(16))
+        self.assertEqual((len(kept), dropped[0][1]), (1, 'doublon'))
+
+    def test_ai_quoted_fragment_with_ellipsis_accepted(self):
+        from . import ai_fixtures as F
+        q = dict(F.good(16), explain_fr="Le verset dit : « Car Dieu a tant aimé le monde … afin que quiconque croit en lui ne périsse point ».")
+        self.assertEqual(len(self._kept(q)[0]), 1)
+
+    def test_ai_verdicts(self):
+        from . import ai_bank, ai_fixtures as F
+        kept, _ = self._kept(F.good(16), F.good(3), F.good(19))
+        ok, out = ai_bank.apply_verdicts(kept, F.verdicts(F.verdict(1, 'A'), F.verdict(2, 'B'), F.verdict(3, 'C')))
+        self.assertEqual((len(ok), out), (3, []))
+        cases = [F.verdict(1, 'B'), F.verdict(1, 'A', answer_en='none'), F.verdict(1, 'A', single_answer=False),
+                 F.verdict(1, 'A', same_meaning=False), F.verdict(1, 'A', neutral=False),
+                 F.verdict(1, 'A', from_text=False), F.verdict(1, 'A', explanation_ok=False),
+                 F.verdict(1, 'A', neutral='yes')]
+        for v in cases:
+            ok, out = ai_bank.apply_verdicts(kept[:1], {'verdicts': [v]})
+            self.assertEqual((len(ok), len(out)), (0, 1), v)
+        # Sans verdict (ou réponse illisible) : rien n'est servi.
+        for junk in (None, {}, {'verdicts': [{'n': 'x'}]}, F.verdicts(F.verdict(2, 'A'))):
+            self.assertEqual(len(ai_bank.apply_verdicts(kept[:1], junk)[0]), 0)
+
+    def test_ai_messages(self):
+        from . import ai_bank, ai_fixtures as F
+        msg = ai_bank.generation_message(43, 3)
+        self.assertIn('16. Car Dieu a tant aimé le monde', msg)
+        self.assertIn('16. For God so loved the world', msg)
+        self.assertIn('Number of questions: 10', msg)
+        self.assertEqual(ai_bank.question_count(2), 4)
+        kept, _ = self._kept(F.good(16))
+        check = ai_bank.verify_message(43, 3, kept)
+        self.assertIn('A. Pour que celui qui croit', check)
+        self.assertNotIn('"answer"', check)
+        for bad in ('43', '43:99', '67:1', 'x', None, '43:3:16'):
+            with self.assertRaises(ValueError):
+                ai_bank.parse_chapter(bad)
+        self.assertEqual(ai_bank.parse_chapter(' 43:3 '), (43, 3))
+
+    def test_ai_bank_in_matches(self):
+        bank = [{'id': 'gen-ai-7', 'q': {'fr': 'Q ?', 'en': 'Q?'}, 'choices': {'fr': list('abcd'), 'en': list('efgh')},
+                 'answer': 2, 'explain': {'fr': 'x', 'en': 'y'}, 'ref': '57:1:10', '_start': (57, 1, 10)}]
+        qs = Q.build_questions(['57:1'], 'fr', 5, random.Random(1), all_curated_ids(), bank=bank)
+        ai = [q for q in qs if q['source'] == 'ai']
+        self.assertEqual(len(ai), 1)
+        self.assertEqual(ai[0]['options'][ai[0]['answer']], 'c')
+        self.assertFalse(any(q['source'] == 'ai' for q in Q.build_questions(['43:3'], 'fr', 5, random.Random(1), bank=bank)))
+
+
+class AiBankTest(AiBankChecks, unittest.TestCase):
+    pass
+
+
 if __name__ == '__main__':
     unittest.main()

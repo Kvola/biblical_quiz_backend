@@ -19,5 +19,15 @@
             <field name="interval_number">1</field>
             <field name="interval_type">minutes</field>
         </record>
+        <!-- Déclenchée aussi à chaque demande d'un lecteur (ir.cron._trigger) : ce passage
+             régulier rattrape les essais à refaire et les rédactions interrompues. -->
+        <record id="cron_ai_generate" model="ir.cron">
+            <field name="name">Quiz Biblique : rédiger les chapitres en file (questions IA)</field>
+            <field name="model_id" ref="model_bq_ai_chapter"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_generate()</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+        </record>
     </data>
 </odoo>

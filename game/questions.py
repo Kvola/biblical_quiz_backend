@@ -265,13 +265,17 @@ def passage_label(passage, lang):
 # Construction d'un questionnaire
 # ---------------------------------------------------------------------------
 
-def build_questions(passages, lang, count, rnd, exclude_ids=frozenset()):
+def build_questions(passages, lang, count, rnd, exclude_ids=frozenset(), bank=()):
     """Questions à choix multiple pour un match sur `passages` (codes, voir parse_passage).
 
     Renvoie au plus `count` dicts {'id', 'prompt', 'options', 'answer', 'explain',
     'ref', 'ref_label', 'source'} ; `options` déjà mélangées, `answer` = indice de
     la bonne. Relues d'abord, puis générées. Peut en renvoyer moins si les
     passages sont trop courts (voir available_count).
+
+    `bank` : questions de compréhension rédigées par IA ET relues (même forme que
+    les questions du contenu, avec `_start`) ; elles passent après les questions
+    du contenu et avant les questions tirées du texte.
     """
     _check_lang(lang)
     parsed = [p if isinstance(p, Passage) else parse_passage(p) for p in passages]
@@ -283,14 +287,18 @@ def build_questions(passages, lang, count, rnd, exclude_ids=frozenset()):
     curated = [q for q in curated_questions()
                if q['id'] not in exclude_ids and any(p.contains(*q['_start']) for p in parsed)]
     rnd.shuffle(curated)
-    out = [_from_curated(q, lang, rnd) for q in curated[:count]]
+    extra = [q for q in bank
+             if q['id'] not in exclude_ids and any(p.contains(*q['_start']) for p in parsed)]
+    rnd.shuffle(extra)
+    picked = (curated + extra)[:count]
+    out = [_from_curated(q, lang, rnd, 'reviewed' if i < len(curated) else 'ai') for i, q in enumerate(picked)]
     if len(out) >= count:
         return out
 
     # 2) Questions tirées du texte, pour compléter.
     gen = _Generator(get_bible(lang), lang, parsed, rnd, exclude_ids)
-    for q in curated[:count]:
-        gen.used.add(q['_start'])  # pas de texte à compléter sur un verset déjà interrogé
+    for q in picked:
+        gen.used.add(tuple(q['_start']))  # pas de texte à compléter sur un verset déjà interrogé
     out.extend(gen.generate(count - len(out)))
     return out
 
@@ -307,7 +315,7 @@ def _available_count(codes, lang, cap):
     return len(build_questions(list(codes), lang, cap, random.Random(0)))
 
 
-def _from_curated(q, lang, rnd):
+def _from_curated(q, lang, rnd, source='reviewed'):
     choices = q['choices'][lang]
     order = list(range(len(choices)))
     rnd.shuffle(order)
@@ -319,7 +327,7 @@ def _from_curated(q, lang, rnd):
         'explain': q['explain'][lang],
         'ref': q['ref'],
         'ref_label': ref_label(q['ref'], lang),
-        'source': 'reviewed',
+        'source': source,
     }
 
 

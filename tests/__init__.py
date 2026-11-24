@@ -4,3 +4,4 @@ from . import test_quiz_biblique
 from . import test_questions
 from . import test_game
 from . import test_api
+from . import test_ai

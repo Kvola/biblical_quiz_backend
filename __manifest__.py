@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Quiz Biblique — jeu en ligne, page de téléchargement et guide",
-    'version': '19.0.2.1.1',
+    'version': '19.0.3.0.0',
     'category': 'Productivity',
     'summary': "Serveur du jeu en ligne de l'application Quiz Biblique (matchs à la main, "
                "équipes, tournois) ; page /apps et guide d'utilisation",
@@ -25,6 +25,12 @@ WhatsApp, pseudo unique) :
 * Questions : celles, relues, de l'application, puis des questions tirées du
   texte biblique (``game/``, contenu copié par ``biblical_quiz/scripts/sync_backend_content.py``).
 
+* **Questions de compréhension rédigées par IA** (``models/bq_ai.py``) : une banque
+  par chapitre, rédigée une fois par Claude, contrôlée (citations mot pour mot,
+  relecture indépendante à l'aveugle), servie à tous avec la mention « non relu »
+  jusqu'à la relecture dans le back-office. Quota gratuit par appareil et par
+  jour, plafond quotidien du serveur, signalement par les lecteurs.
+
 Il déclare aussi l'application sur ``/apps`` (socle ``mobile_app_release``)
 et publie son guide (``/apps/quiz-biblique/guide`` et ``.pdf``), produit
 depuis ``biblical_quiz/docs/GUIDE_UTILISATEUR.md`` par
@@ -32,6 +38,7 @@ depuis ``biblical_quiz/docs/GUIDE_UTILISATEUR.md`` par
     """,
     'author': 'ICP',
     'website': 'https://ivorycocoa.ci',
+    'external_dependencies': {'python': ['anthropic']},
     'depends': ['bus', 'mobile_app_release', 'otp_auth', 'push_notification_hub'],
     'data': [
         'security/bq_security.xml',
@@ -40,6 +47,7 @@ depuis ``biblical_quiz/docs/GUIDE_UTILISATEUR.md`` par
         'data/mobile_app.xml',
         'data/bq_cron.xml',
         'views/bq_views.xml',
+        'views/bq_ai_views.xml',
     ],
     'pre_init_hook': 'pre_init_hook',
     'installable': True,
