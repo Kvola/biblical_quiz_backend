@@ -235,6 +235,37 @@ class TestAiBank(AiCase):
             with self.assertRaises(AiRefusal):
                 Question._report(self.dev_a, bad, 'wrong', '')
 
+    def test_validation_en_masse(self):
+        record, _calls = self.ready()
+        other, _calls = self.ready('43:4', generation=F.generation(dict(F.good(16), verse=16)),
+                                   verdicts=F.verdicts(F.verdict(1, 'A')))
+        self.assertEqual(other.state, 'empty')      # la citation n'est pas dans Jean 4 : rien à valider là
+        q1, q2, q3 = record.question_ids.sorted('id')
+        Question = self.env['bq.ai.question'].sudo()
+        Question._report(self.dev_a, 'gen-ai-%s' % q2.id, 'wrong', '')     # signalée : jamais validée en masse
+        q3.action_withdraw()                                                # retirée : non plus
+        rev = record.rev
+        action = (q1 | q2 | q3).action_validate_bulk()
+        self.assertEqual((q1.state, q2.state, q3.state), ('validated', 'auto', 'withdrawn'))
+        self.assertEqual(record.rev, rev + 1)                               # une seule révision pour le lot
+        self.assertEqual(action['params']['type'], 'warning')
+        self.assertIn('1 question', action['params']['message'])
+        self.assertIn('2 laissée', action['params']['message'])
+        self.assertEqual(action['params']['next']['tag'], 'soft_reload')
+        # Rien à faire : pas d'écriture, pas de nouvelle révision.
+        rev = record.rev
+        self.assertEqual(q1.action_validate_bulk()['params']['type'], 'info')
+        self.assertEqual((q2 | q3).action_validate_bulk()['params']['type'], 'warning')
+        self.assertEqual(record.rev, rev)
+        # Par chapitre : tout ce qui est non relu et non signalé.
+        third, _calls = self.ready('43:3')                                  # déjà prêt : même chapitre
+        self.assertEqual(third, record)
+        q2.report_ids.unlink()
+        action = (record | other).action_validate_all()
+        self.assertEqual((q2.state, q3.state, action['params']['type']), ('validated', 'withdrawn', 'success'))
+        self.assertEqual(record.unreviewed_count, 0)
+        self.assertEqual(len(self.Chapter._match_bank([qgen.parse_passage('43:3')])), 2)
+
     def test_matchs_seulement_les_questions_relues(self):
         record, _calls = self.ready()
         passages = [qgen.parse_passage('43:3')]

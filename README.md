@@ -76,6 +76,7 @@ Une banque de questions par chapitre, pour le « Quiz sur mes lectures » de l'a
 - **Relecture** : Questions IA → *À relire*. *Valider* enlève la mention « non relu » dans l'application
   et rend la question utilisable dans les matchs ; *Retirer* cesse de la servir. Corriger un texte suffit à
   le faire parvenir aux téléphones (révision du chapitre).
+- **Validation en masse** (19.0.3.1.0) : dans *À relire*, cocher des questions puis *Valider la sélection* (ou *Retirer la sélection*) ; dans *Chapitres*, *Valider les questions de ces chapitres*, et sur la fiche d'un chapitre *Valider toutes les questions*. Une question signalée par un lecteur ou retirée n'est jamais validée en masse : elle reste à ouvrir.
 - **Signalements** des lecteurs : une question jamais relue est retirée d'office au 3e appareil qui la
   signale (réglable).
 - **Coût mesuré** (essais réels du 24 novembre 2026, claude-opus-5-5) : Philémon, 9 questions, 0,23 $ ; Psaume 23, 4 questions, 0,10 $, 39 secondes.

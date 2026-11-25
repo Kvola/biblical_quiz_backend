@@ -316,6 +316,12 @@ class BqAiChapter(models.Model):
         """États des demandes de lecteurs attachées à ce chapitre (suivi, tests)."""
         return self.env['bq.ai.request'].search([('chapter_id', 'in', self.ids)], order='id').mapped('state')
 
+    def action_validate_all(self):
+        """Valide toutes les questions non relues de ces chapitres (sauf signalées : voir ``_validate_bulk``)."""
+        Question = self.env['bq.ai.question']
+        done, skipped = self.question_ids.filtered(lambda q: q.state == 'auto')._validate_bulk()
+        return Question._bulk_notice(done, skipped)
+
     def action_queue(self):
         """Back-office : (re)mettre en file. Les questions déjà relues sont conservées."""
         for c in self:
@@ -597,6 +603,40 @@ class BqAiQuestion(models.Model):
 
     def action_validate(self):
         self.write({'state': 'validated', 'withdrawn_reason': False})
+
+    def _validate_bulk(self):
+        """Valide en masse. Renvoie (validées, laissées de côté).
+
+        Deux gardes, parce qu'on valide ici sans ouvrir chaque question :
+        une question SIGNALÉE par un lecteur et une question RETIRÉE ne passent
+        jamais par la validation en masse — il faut les ouvrir et décider.
+        """
+        todo = self.filtered(lambda q: q.state == 'auto' and not q.report_count)
+        skipped = self.filtered(lambda q: q.state != 'validated') - todo
+        if todo:
+            todo.write({'state': 'validated', 'withdrawn_reason': False})
+        return todo, skipped
+
+    @api.model
+    def _bulk_notice(self, done, skipped):
+        if done and not skipped:
+            message, kind = _("%s question(s) validée(s).", len(done)), 'success'
+        elif done:
+            message, kind = _("%(done)s question(s) validée(s). %(skipped)s laissée(s) de côté (signalées ou "
+                              "retirées) : à ouvrir une par une.", done=len(done), skipped=len(skipped)), 'warning'
+        elif skipped:
+            message, kind = _("Aucune validation : les %s question(s) choisies sont signalées ou retirées, "
+                              "à ouvrir une par une.", len(skipped)), 'warning'
+        else:
+            message, kind = _("Rien à valider : ces questions sont déjà relues."), 'info'
+        return {'type': 'ir.actions.client', 'tag': 'display_notification',
+                'params': {'title': _("Validation en masse"), 'message': message, 'type': kind, 'sticky': False,
+                           'next': {'type': 'ir.actions.client', 'tag': 'soft_reload'}}}
+
+    def action_validate_bulk(self):
+        """Bouton « Valider la sélection » de la liste."""
+        done, skipped = self._validate_bulk()
+        return self._bulk_notice(done, skipped)
 
     def action_withdraw(self):
         self.write({'state': 'withdrawn', 'withdrawn_reason': _("Retirée à la relecture")})

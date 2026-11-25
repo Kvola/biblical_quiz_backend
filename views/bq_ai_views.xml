@@ -7,7 +7,13 @@
         <field name="arch" type="xml">
             <list create="0" decoration-muted="state == 'withdrawn'" decoration-success="state == 'validated'"
                   decoration-danger="report_count &gt; 0 and state == 'auto'">
-                <field name="ref_label"/>
+                <header>
+                    <button name="action_validate_bulk" type="object" string="Valider la sélection" class="btn-primary"
+                            confirm="Les questions choisies seront servies sans la mention « non relu » et pourront servir dans les matchs. Les questions signalées ou retirées ne sont pas touchées. Continuer ?"/>
+                    <button name="action_withdraw" type="object" string="Retirer la sélection"
+                            confirm="Les questions choisies ne seront plus servies. Continuer ?"/>
+                </header>
+                <field name="ref_label" width="150px"/>
                 <field name="q_fr"/>
                 <field name="answer_fr"/>
                 <field name="skill" optional="hide"/>
@@ -109,6 +115,11 @@
         <field name="model">bq.ai.chapter</field>
         <field name="arch" type="xml">
             <list create="0" decoration-muted="state in ('empty', 'failed')" decoration-info="state in ('queued', 'pending')">
+                <header>
+                    <button name="action_validate_all" type="object" string="Valider les questions de ces chapitres"
+                            class="btn-primary"
+                            confirm="Toutes les questions non relues des chapitres choisis seront validées, sauf celles que des lecteurs ont signalées. Continuer ?"/>
+                </header>
                 <field name="display_name" string="Chapitre"/>
                 <field name="state" widget="badge" decoration-success="state == 'ready'"
                        decoration-info="state in ('queued', 'pending')" decoration-danger="state == 'failed'"/>
@@ -125,6 +136,9 @@
         <field name="arch" type="xml">
             <form create="0">
                 <header>
+                    <button name="action_validate_all" type="object" string="Valider toutes les questions" class="btn-primary"
+                            invisible="unreviewed_count == 0"
+                            confirm="Toutes les questions non relues de ce chapitre seront validées, sauf celles que des lecteurs ont signalées. Continuer ?"/>
                     <button name="action_queue" type="object" string="Rédiger de nouveau"
                             invisible="state in ('queued', 'pending')"
                             confirm="Les questions déjà relues sont conservées ; les questions non relues sont remplacées. Continuer ?"/>
